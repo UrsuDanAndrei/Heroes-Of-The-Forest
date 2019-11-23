@@ -19,9 +19,10 @@ public abstract class Hero {
 
     }
 
-    public Hero(int posMapX, int posMapY) {
+    public Hero(int posMapX, int posMapY, List<Ability> abilities) {
         this.posMapX = posMapX;
         this.posMapY = posMapY;
+        this.abilities = abilities;
     }
 
     public abstract void getAffectedByAbility(Ability ability);
