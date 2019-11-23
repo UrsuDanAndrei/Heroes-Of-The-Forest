@@ -1,5 +1,10 @@
 package abilities.rogueAbilities;
 
+import heroes.Knight;
+import heroes.Pyromancer;
+import heroes.Rogue;
+import heroes.Wizard;
+
 public class Backstab extends RogueAbility {
     @Override
     public void affectHero(Pyromancer pyro) {

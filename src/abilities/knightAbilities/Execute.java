@@ -1,5 +1,10 @@
 package abilities.knightAbilities;
 
+import heroes.Knight;
+import heroes.Pyromancer;
+import heroes.Rogue;
+import heroes.Wizard;
+
 public class Execute extends KnightAbility {
     @Override
     public void affectHero(Pyromancer pyro) {

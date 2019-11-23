@@ -2,6 +2,10 @@ package abilities.rogueAbilities;
 
 import abilities.overtimeAbilities.OvertimeAbility;
 import abilities.overtimeAbilities.OvertimeEffect;
+import heroes.Knight;
+import heroes.Pyromancer;
+import heroes.Rogue;
+import heroes.Wizard;
 
 public class Paralysis extends RogueAbility implements OvertimeAbility {
     public OvertimeEffect overtimeEffect;

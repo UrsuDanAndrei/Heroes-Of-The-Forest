@@ -1,5 +1,10 @@
 package abilities.overtimeAbilities;
 
+import heroes.Knight;
+import heroes.Pyromancer;
+import heroes.Rogue;
+import heroes.Wizard;
+
 public class Burn extends OvertimeEffect {
     @Override
     public void overtimeAffectHero(Pyromancer pyro) {

@@ -1,5 +1,10 @@
 package abilities.pyromancerAbilities;
 
+import heroes.Knight;
+import heroes.Pyromancer;
+import heroes.Rogue;
+import heroes.Wizard;
+
 public class Fireblast extends  PyromancerAbility {
     @Override
     public void affectHero(Pyromancer pyro) {

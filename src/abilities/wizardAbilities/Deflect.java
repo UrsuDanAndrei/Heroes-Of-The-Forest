@@ -1,5 +1,10 @@
 package abilities.wizardAbilities;
 
+import heroes.Knight;
+import heroes.Pyromancer;
+import heroes.Rogue;
+import heroes.Wizard;
+
 public class Deflect extends WizardAbility {
     @Override
     public void affectHero(Pyromancer pyro) {

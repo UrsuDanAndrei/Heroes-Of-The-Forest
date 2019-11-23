@@ -2,6 +2,10 @@ package abilities.knightAbilities;
 
 import abilities.overtimeAbilities.OvertimeAbility;
 import abilities.overtimeAbilities.OvertimeEffect;
+import heroes.Knight;
+import heroes.Pyromancer;
+import heroes.Rogue;
+import heroes.Wizard;
 
 public class Slam extends KnightAbility implements OvertimeAbility {
     public OvertimeEffect overtimeEffect;
@@ -10,6 +14,7 @@ public class Slam extends KnightAbility implements OvertimeAbility {
     public OvertimeEffect getOvertimeEffect() {
         return overtimeEffect;
     }
+
     @Override
     public void affectHero(Pyromancer pyro) {
         // TODO

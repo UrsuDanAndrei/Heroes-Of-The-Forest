@@ -2,6 +2,10 @@ package abilities.pyromancerAbilities;
 
 import abilities.overtimeAbilities.OvertimeAbility;
 import abilities.overtimeAbilities.OvertimeEffect;
+import heroes.Knight;
+import heroes.Pyromancer;
+import heroes.Rogue;
+import heroes.Wizard;
 
 public class Ignite extends PyromancerAbility implements OvertimeAbility {
     private OvertimeEffect overtimeEffect;
