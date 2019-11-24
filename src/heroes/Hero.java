@@ -8,6 +8,8 @@ public abstract class Hero {
     protected int health;
     protected int damage;
     protected int level;
+    protected int id;
+    protected int xp;
 
     protected int posMapX;
     protected int posMapY;
@@ -77,6 +79,22 @@ public abstract class Hero {
 
     public OvertimeEffect getOvertimeEffect() {
         return overtimeEffect;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
     }
 
     public void setOvertimeEffect(OvertimeEffect overtimeEffect) {
