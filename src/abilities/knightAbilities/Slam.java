@@ -16,6 +16,11 @@ public class Slam extends KnightAbility implements OvertimeAbility {
     }
 
     @Override
+    public void levelUp() {
+
+    }
+
+    @Override
     public void affectHero(Pyromancer pyro) {
         // TODO
     }

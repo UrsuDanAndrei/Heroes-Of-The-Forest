@@ -6,6 +6,12 @@ import heroes.Rogue;
 import heroes.Wizard;
 
 public class Backstab extends RogueAbility {
+
+    @Override
+    public void levelUp() {
+
+    }
+
     @Override
     public void affectHero(Pyromancer pyro) {
         // TODO

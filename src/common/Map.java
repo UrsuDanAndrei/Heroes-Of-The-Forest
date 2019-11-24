@@ -13,14 +13,14 @@ import java.util.ListIterator;
 public class Map {
     private static Map instance = null;
 
-    private int dimX = 0;
-    private int dimY = 0;
+    private int dimX;
+    private int dimY;
 
-    private List<ArrayList<MapCell>> mapMatrix = null;
+    private List<ArrayList<MapCell>> mapMatrix;
 
     private class MapCell {
-        private Terrain terrain = null;
-        private List<Hero> inCellHeroes = null;
+        private Terrain terrain;
+        private List<Hero> inCellHeroes;
 
         MapCell(char terrainChar) {
             inCellHeroes = new ArrayList<>();
@@ -64,16 +64,9 @@ public class Map {
 
     }
 
-    private Map(int dimX, int dimY,  List<ArrayList<Character>> charMatrix) {
+    private Map(int dimX, int dimY,  List<String> charMatrix) {
         this.dimX = dimX;
         this.dimY = dimY;
-
-        mapMatrix = new ArrayList<>(dimX);
-        ListIterator<ArrayList<MapCell>> it = mapMatrix.listIterator();
-        while (it.hasNext()) {
-            it.next();
-            it.set(new ArrayList<>(dimY));
-        }
 
         setMapMatrix(charMatrix);
     }
@@ -86,7 +79,7 @@ public class Map {
         return instance;
     }
 
-    public static Map getInstance(int dimX, int dimY, List<ArrayList<Character>> charMatrix) {
+    public static Map getInstance(int dimX, int dimY, List<String> charMatrix) {
         if (instance == null) {
             instance = new Map(dimX, dimY, charMatrix);
         }
@@ -94,19 +87,14 @@ public class Map {
         return instance;
     }
 
-    private void setMapMatrix(List<ArrayList<Character>> charMatrix) {
-        ListIterator<ArrayList<MapCell>> itMap = mapMatrix.listIterator();
-        ListIterator<ArrayList<Character>> itCharMatrix = charMatrix.listIterator();
-
-        // iterates thru charMatrix rows
-        while (itCharMatrix.hasNext()) {
-            ListIterator<MapCell> itRowMap = itMap.next().listIterator();
-            ListIterator<Character> itRowCharMatrix = itCharMatrix.next().listIterator();
-
-            // iterates thru a charMatrix row and sets up every MapCell in mapMatrix for that row
-            while (itRowCharMatrix.hasNext()) {
-                itRowMap.set(new MapCell(itRowCharMatrix.next()));
+    private void setMapMatrix(List<String> charMatrix) {
+        mapMatrix = new ArrayList<>(dimX);
+        for (int i = 0; i < dimX; i++) {
+            ArrayList<MapCell> row = new ArrayList<>(dimY);
+            for (int j = 0; j < dimY; j++) {
+                row.add(new MapCell(charMatrix.get(i).charAt(j)));
             }
+            mapMatrix.add(row);
         }
     }
 
@@ -145,5 +133,17 @@ public class Map {
 
     public List<Hero> getHeroes(int posMapX, int posMapY) {
         return mapMatrix.get(posMapX).get(posMapY).inCellHeroes;
+    }
+
+    public int getDimX() {
+        return dimX;
+    }
+
+    public int getDimY() {
+        return dimY;
+    }
+
+    public List<ArrayList<MapCell>> getMapMatrix() {
+        return mapMatrix;
     }
 }

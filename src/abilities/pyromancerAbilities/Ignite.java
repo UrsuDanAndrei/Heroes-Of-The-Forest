@@ -11,6 +11,11 @@ public class Ignite extends PyromancerAbility implements OvertimeAbility {
     private OvertimeEffect overtimeEffect;
 
     @Override
+    public void levelUp() {
+
+    }
+
+    @Override
     public OvertimeEffect getOvertimeEffect() {
         return overtimeEffect;
     }

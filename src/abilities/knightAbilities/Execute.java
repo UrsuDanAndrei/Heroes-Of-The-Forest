@@ -7,6 +7,11 @@ import heroes.Wizard;
 
 public class Execute extends KnightAbility {
     @Override
+    public void levelUp() {
+
+    }
+
+    @Override
     public void affectHero(Pyromancer pyro) {
         // TODO
     }

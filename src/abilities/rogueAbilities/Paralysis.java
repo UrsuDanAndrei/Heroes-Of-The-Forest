@@ -16,6 +16,11 @@ public class Paralysis extends RogueAbility implements OvertimeAbility {
     }
 
     @Override
+    public void levelUp() {
+
+    }
+
+    @Override
     public void affectHero(Pyromancer pyro) {
         // TODO
     }
