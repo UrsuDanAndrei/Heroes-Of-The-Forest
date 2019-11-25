@@ -1,11 +1,12 @@
 package abilities.pyromancerAbilities;
 
+import abilities.overtimeAbilities.Burn;
 import abilities.overtimeAbilities.OvertimeAbility;
 import abilities.overtimeAbilities.OvertimeEffect;
-import heroes.Knight;
-import heroes.Pyromancer;
-import heroes.Rogue;
-import heroes.Wizard;
+import common.Map;
+import heroes.*;
+
+import java.awt.image.ImageProducer;
 
 public class Ignite extends PyromancerAbility implements OvertimeAbility {
     private static final float ROGUE_MODIFIER = 0.8f;
@@ -16,7 +17,11 @@ public class Ignite extends PyromancerAbility implements OvertimeAbility {
     private static final int INITIAL_DAMAGE = 150;
     private static final int BONUS_DAMAGE_LEVEL_UP = 20;
 
-    private OvertimeEffect overtimeEffect;
+    private static final int INITIAL_BURN_DAMAGE = 50;
+    private static final int BONUS_BURN_DAMAGE_LEVEL_UP = 30;
+    private static final int NO_ROUNDS_BURN = 2;
+
+    private Burn burn;
 
     public Ignite() {
         damage = INITIAL_DAMAGE;
@@ -30,26 +35,32 @@ public class Ignite extends PyromancerAbility implements OvertimeAbility {
 
     @Override
     public OvertimeEffect getOvertimeEffect() {
-        return overtimeEffect;
+        return burn;
     }
 
     @Override
     public void affectHero(Pyromancer pyro) {
-        // TODO
+        affectHero(pyro, PYROMANCER_MODIFIER);
     }
 
     @Override
     public void affectHero(Knight knight) {
-        // TODO
+        affectHero(knight, KNIGHT_MODIFIER);
     }
 
     @Override
     public void affectHero(Wizard wizard) {
-        // TODO
+        affectHero(wizard, WIZARD_MODIFIER);
     }
 
     @Override
     public void affectHero(Rogue rogue) {
-        // TODO
+        affectHero(rogue, ROGUE_MODIFIER);
+    }
+
+    private void affectHero(Hero hero, float heroModifier) {
+        float terrainModifier = caster.getTerrainModifier();
+        float finalDamage =
+        hero.setOvertimeEffect(new Burn());
     }
 }

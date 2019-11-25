@@ -1,15 +1,20 @@
 package terrains;
 
+import abilities.rogueAbilities.Backstab;
+import abilities.rogueAbilities.Paralysis;
 import heroes.Knight;
 import heroes.Pyromancer;
 import heroes.Rogue;
 import heroes.Wizard;
 
 public class Desert extends Terrain {
-    public final static float PYROMANCER_MODIFIER = 0f;
-    public final static float KNIGHT_MODIFIER = 0f;
-    public final static float WIZARD_MODIFIER = 1.1f;
-    public final static float ROGUE_MODIFIER = 0f;
+    private final static float PYROMANCER_MODIFIER = 0f;
+    private final static float KNIGHT_MODIFIER = 0f;
+    private final static float WIZARD_MODIFIER = 1.1f;
+    private final static float ROGUE_MODIFIER = 0f;
+
+    private final static int NO_ROUNDS_STUN = 3;
+    private final static float BACKSTAB_BONUS_DAMAGE = 1.0f;
 
     @Override
     public float getTerrainModifier(Pyromancer pyro) {
@@ -29,5 +34,15 @@ public class Desert extends Terrain {
     @Override
     public float getTerrainModifier(Rogue rogue) {
         return ROGUE_MODIFIER;
+    }
+
+    @Override
+    public int getNoRoundsStun(Paralysis paralysis) {
+        return NO_ROUNDS_STUN;
+    }
+
+    @Override
+    public float getBonusDamage(Backstab backstab) {
+        return BACKSTAB_BONUS_DAMAGE;
     }
 }

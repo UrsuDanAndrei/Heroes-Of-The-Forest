@@ -28,7 +28,7 @@ public class Fireblast extends PyromancerAbility {
 
     @Override
     public void affectHero(Knight knight) {
-        affectHero(knight, PYROMANCER_MODIFIER);
+        affectHero(knight, KNIGHT_MODIFIER);
     }
 
     @Override
@@ -43,6 +43,7 @@ public class Fireblast extends PyromancerAbility {
 
     private void affectHero(Hero hero, float heroModifier) {
         float terrainModifier = caster.getTerrainModifier();
-        int finalDamage = damage
+        float finalDamage = damage * heroModifier * terrainModifier;
+        hero.setHealth(hero.getHealth() - Math.round(finalDamage));
     }
 }
