@@ -39,17 +39,9 @@ public abstract class Hero {
     public void bonusXpForKill(Hero hero2) {
         xp += Math.max(0,
                 Constants.BONUS_XP - (level - hero2.getLevel()) * Constants.LEVEL_FACTOR_BONUS_XP);
-        levelUp();
     }
 
-    public void levelUp() {
-        if (xp >= Constants.LEVEL1_XP_THRESHOLD + level * Constants.ADDITIONAL_XP_TO_NEXT_LEVEL) {
-            ++level;
-            for (Ability ability : abilities) {
-                ability.levelUp();
-            }
-        }
-    }
+    public abstract void checkLevelUp();
 
 
     public int getHealth() {

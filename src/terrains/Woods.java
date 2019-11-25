@@ -9,7 +9,7 @@ public class Woods extends Terrain {
     public final static float PYROMANCER_MODIFIER = 0f;
     public final static float KNIGHT_MODIFIER = 0f;
     public final static float WIZARD_MODIFIER = 0f;
-    public final static float ROGUE_MODIFIER = 0.15f;
+    public final static float ROGUE_MODIFIER = 1.15f;
 
     @Override
     public float getTerrainModifier(Pyromancer pyro) {

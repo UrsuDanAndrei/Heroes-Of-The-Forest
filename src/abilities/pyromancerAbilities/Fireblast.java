@@ -2,21 +2,23 @@ package abilities.pyromancerAbilities;
 
 import heroes.*;
 
-public class Fireblast extends  PyromancerAbility {
-    public static final float ROGUE_MODIFIER = -0.2f;
-    public static final float KNIGHT_MODIFIER = 0.2f;
-    public static final float PYROMANCER_MODIFIER = -0.1f;
-    public static final float WIZARD_MODIFIER = 0.05f;
-    public static final int INITIAL_DAMAGE = 350;
-    public static final int BONUS_DAMAGE_LEVEL = 50;
+public class Fireblast extends PyromancerAbility {
+    private static final float ROGUE_MODIFIER = 0.8f;
+    private static final float KNIGHT_MODIFIER = 1.2f;
+    private static final float PYROMANCER_MODIFIER = 0.9f;
+    private static final float WIZARD_MODIFIER = 1.05f;
 
-    Fireblast() {
+    private static final int INITIAL_DAMAGE = 350;
+    private static final int BONUS_DAMAGE_LEVEL_UP = 50;
+
+    public Fireblast() {
         damage = INITIAL_DAMAGE;
     }
 
     @Override
     public void levelUp() {
-        damage += BONUS_DAMAGE_LEVEL;
+        ++level;
+        damage = INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * level;
     }
 
     @Override
@@ -41,5 +43,6 @@ public class Fireblast extends  PyromancerAbility {
 
     private void affectHero(Hero hero, float heroModifier) {
         float terrainModifier = caster.getTerrainModifier();
+        int finalDamage = damage
     }
 }

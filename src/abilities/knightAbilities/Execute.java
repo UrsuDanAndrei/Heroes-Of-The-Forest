@@ -6,13 +6,18 @@ import heroes.Rogue;
 import heroes.Wizard;
 
 public class Execute extends KnightAbility {
-    public static final float ROGUE_MODIFIER = ;
-    public static final float KNIGHT_MODIFIER = ;
-    public static final float PYROMANCER_MODIFIER = -0.10f;
-    public static final float WIZARD_MODIFIER = ;
+    private static final float ROGUE_MODIFIER = 1.15f;
+    private static final float KNIGHT_MODIFIER = 1.0f;
+    private static final float PYROMANCER_MODIFIER = 1.1f;
+    private static final float WIZARD_MODIFIER = 0.8f;
+
+    private static final int INITIAL_DAMAGE = 200;
+    private static final int BONUS_DAMAGE_LEVEL_UP = 30;
+
     @Override
     public void levelUp() {
-
+        ++level;
+        damage = INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * level;
     }
 
     @Override

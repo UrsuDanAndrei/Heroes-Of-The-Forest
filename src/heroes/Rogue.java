@@ -2,6 +2,7 @@ package heroes;
 
 import abilities.Ability;
 import abilities.overtimeAbilities.OvertimeEffect;
+import common.Constants;
 import common.Map;
 import terrains.Terrain;
 
@@ -9,6 +10,18 @@ import java.util.List;
 
 public class Rogue extends Hero {
     private static final int INITIAL_HEALTH = 600;
+    private static final int BONUS_HEALTH_LEVEL_UP = 40;
+
+    @Override
+    public void checkLevelUp() {
+        while (xp >= Constants.LEVEL1_XP_THRESHOLD + level * Constants.ADDITIONAL_XP_TO_LEVEL_UP) {
+            ++level;
+            health = INITIAL_HEALTH + BONUS_HEALTH_LEVEL_UP * level;
+            for (Ability ability : abilities) {
+                ability.levelUp();
+            }
+        }
+    }
 
     public Rogue(int posMapX, int posMapY, List<Ability> abilities) {
         super(posMapX, posMapY, abilities);

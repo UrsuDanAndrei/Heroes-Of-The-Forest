@@ -8,7 +8,7 @@ import heroes.Wizard;
 public class Desert extends Terrain {
     public final static float PYROMANCER_MODIFIER = 0f;
     public final static float KNIGHT_MODIFIER = 0f;
-    public final static float WIZARD_MODIFIER = 0.1f;
+    public final static float WIZARD_MODIFIER = 1.1f;
     public final static float ROGUE_MODIFIER = 0f;
 
     @Override
