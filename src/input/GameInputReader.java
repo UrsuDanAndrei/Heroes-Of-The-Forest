@@ -15,18 +15,20 @@ public class GameInputReader {
     private final String inputPath;
     private final String outputPath;
 
-    private int noHeroes;
-    private int noRounds;
-    private List<String> moves;
-    private List<Hero> heroes;
-    private Map map;
-
     public GameInputReader(String inputPath, String outputPath) {
         this.inputPath = inputPath;
         this.outputPath = outputPath;
     }
 
-    public void read() {
+    public GameInput getGameInput() {
+        int noHeroes = 0;
+        int noRounds = 0;
+
+        List<Hero> heroes = null;
+        List<String> moves = null;
+
+        Map map = null;
+
         try {
             FileSystem fs = new FileSystem(inputPath, outputPath);
 
@@ -88,25 +90,7 @@ public class GameInputReader {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    public int getNoHeroes() {
-        return noHeroes;
-    }
-
-    public int getNoRounds() {
-        return noRounds;
-    }
-
-    public List<String> getMoves() {
-        return moves;
-    }
-
-    public List<Hero> getHeroes() {
-        return heroes;
-    }
-
-    public Map getMap() {
-        return map;
+        return new GameInput(noHeroes, noRounds, heroes, moves, map);
     }
 }

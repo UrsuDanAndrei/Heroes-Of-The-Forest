@@ -8,6 +8,7 @@ import heroes.Hero;
 import heroes.HeroTypes;
 import heroes.Knight;
 import heroes.Pyromancer;
+import input.GameInput;
 import input.GameInputReader;
 import terrains.Terrain;
 import terrains.Volcanic;
@@ -18,14 +19,14 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         GameInputReader gameInputReader = new GameInputReader(args[0], args[1]);
-        gameInputReader.read();
+        GameInput gameInput = gameInputReader.getGameInput();
 
-        int noRounds = gameInputReader.getNoRounds();
-        int noHeroes = gameInputReader.getNoHeroes();
+        int noRounds = gameInput.getNoRounds();
+        int noHeroes = gameInput.getNoHeroes();
 
-        Map map = gameInputReader.getMap();
-        List<Hero> heroes = gameInputReader.getHeroes();
-        List<String> moves = gameInputReader.getMoves();
+        Map map = gameInput.getMap();
+        List<Hero> heroes = gameInput.getHeroes();
+        List<String> moves = gameInput.getMoves();
 
         for (int round = 0; round < noRounds; ++round) {
             for (int heroIndex = 0; heroIndex < noHeroes; ++heroIndex) {
