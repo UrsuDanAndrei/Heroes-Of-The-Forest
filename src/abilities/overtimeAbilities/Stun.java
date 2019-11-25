@@ -1,9 +1,11 @@
 package abilities.overtimeAbilities;
 
+import abilities.knightAbilities.Slam;
 import heroes.*;
 
 public class Stun extends OvertimeEffect {
-    Stun(int noRounds) {
+
+    public Stun(int noRounds) {
         super(noRounds);
     }
 

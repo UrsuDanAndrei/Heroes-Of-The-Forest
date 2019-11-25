@@ -25,4 +25,12 @@ public abstract class Ability {
     public void setCaster(Hero caster) {
         this.caster = caster;
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
 }

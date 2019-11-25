@@ -2,10 +2,8 @@ package abilities.knightAbilities;
 
 import abilities.overtimeAbilities.OvertimeAbility;
 import abilities.overtimeAbilities.OvertimeEffect;
-import heroes.Knight;
-import heroes.Pyromancer;
-import heroes.Rogue;
-import heroes.Wizard;
+import abilities.overtimeAbilities.Stun;
+import heroes.*;
 
 public class Slam extends KnightAbility implements OvertimeAbility {
     private static final float ROGUE_MODIFIER = 0.8f;
@@ -15,6 +13,8 @@ public class Slam extends KnightAbility implements OvertimeAbility {
 
     private static final int INITIAL_DAMAGE = 100;
     private static final int BONUS_DAMAGE_LEVEL_UP = 40;
+
+    private static final int NO_ROUNDS_STUN = 1;
 
     public OvertimeEffect overtimeEffect;
 
@@ -35,21 +35,29 @@ public class Slam extends KnightAbility implements OvertimeAbility {
 
     @Override
     public void affectHero(Pyromancer pyro) {
-        // TODO
+        affectHero(pyro, PYROMANCER_MODIFIER);
     }
 
     @Override
     public void affectHero(Knight knight) {
-        // TODO
+        affectHero(knight, KNIGHT_MODIFIER);
     }
 
     @Override
     public void affectHero(Wizard wizard) {
-        // TODO
+        affectHero(wizard, WIZARD_MODIFIER);
     }
 
     @Override
     public void affectHero(Rogue rogue) {
-        // TODO
+        affectHero(rogue, ROGUE_MODIFIER);
+    }
+
+    private void affectHero(Hero hero, float heroModifier) {
+        float terrainModifier = caster.getTerrainModifier();
+        float finalDamage = damage * heroModifier * terrainModifier;
+
+        hero.setHealth(hero.getHealth() - Math.round(finalDamage));
+        hero.setOvertimeEffect(new Stun(NO_ROUNDS_STUN));
     }
 }

@@ -30,6 +30,11 @@ public class Main {
         for (int round = 0; round < noRounds; ++round) {
             for (int heroIndex = 0; heroIndex < noHeroes; ++heroIndex) {
                 Hero hero = heroes.get(heroIndex);
+
+                if (hero.isDead()) {
+                    continue;
+                }
+
                 hero.getAffectedByOvertimeEffect();
 
                 if (hero.isStunned()) {
@@ -69,6 +74,7 @@ public class Main {
 
             if (hero2.isDead()) {
                 hero1.bonusXpForKill(hero2);
+                hero2.checkLevelUp();
             }
         }
 
@@ -77,6 +83,7 @@ public class Main {
 
             if (hero1.isDead()) {
                 hero1.bonusXpForKill(hero2);
+                hero1.checkLevelUp();
             }
         }
     }

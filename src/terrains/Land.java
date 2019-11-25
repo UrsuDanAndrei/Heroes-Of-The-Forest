@@ -8,12 +8,12 @@ import heroes.Rogue;
 import heroes.Wizard;
 
 public class Land extends Terrain {
-    public final static float PYROMANCER_MODIFIER = 0.0f;
+    public final static float PYROMANCER_MODIFIER = 1.0f;
     public final static float KNIGHT_MODIFIER = 1.15f;
-    public final static float WIZARD_MODIFIER = 0f;
-    public final static float ROGUE_MODIFIER = 0f;
+    public final static float WIZARD_MODIFIER = 1.0f;
+    public final static float ROGUE_MODIFIER = 1.0f;
 
-    private final static int NO_ROUNDS_STUN = 3;
+    private final static int NO_ROUNDS_PARALYSIS = 3;
     private final static float BACKSTAB_BONUS_DAMAGE = 1.0f;
 
     @Override
@@ -37,12 +37,12 @@ public class Land extends Terrain {
     }
 
     @Override
-    public int getNoRoundsStun(Paralysis paralysis) {
-        return NO_ROUNDS_STUN;
+    public int getTerrainAbilityModifier(Paralysis paralysis) {
+        return NO_ROUNDS_PARALYSIS;
     }
 
     @Override
-    public float getBonusDamage(Backstab backstab) {
+    public float getTerrainAbilityModifier(Backstab backstab) {
         return BACKSTAB_BONUS_DAMAGE;
     }
 }

@@ -44,6 +44,7 @@ public class Fireblast extends PyromancerAbility {
     private void affectHero(Hero hero, float heroModifier) {
         float terrainModifier = caster.getTerrainModifier();
         float finalDamage = damage * heroModifier * terrainModifier;
+
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
     }
 }

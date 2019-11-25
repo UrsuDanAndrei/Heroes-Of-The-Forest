@@ -83,6 +83,8 @@ public class GameInputReader {
             for (int i = 0; i < noRounds; i++) {
                 moves.add(fs.nextWord());
             }
+
+            fs.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

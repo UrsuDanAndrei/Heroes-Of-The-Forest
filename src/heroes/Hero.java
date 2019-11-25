@@ -4,6 +4,7 @@ import java.util.List;
 import abilities.Ability;
 import abilities.overtimeAbilities.OvertimeEffect;
 import common.Constants;
+import common.Map;
 import terrains.Terrain;
 
 public abstract class Hero {
@@ -36,13 +37,18 @@ public abstract class Hero {
 
     public abstract void getAffectedByOvertimeEffect();
 
+    public abstract int getMaxHealth();
+
+    public abstract void checkLevelUp();
+
     public void bonusXpForKill(Hero hero2) {
         xp += Math.max(0,
                 Constants.BONUS_XP - (level - hero2.getLevel()) * Constants.LEVEL_FACTOR_BONUS_XP);
     }
 
-    public abstract void checkLevelUp();
-
+    public Terrain getTerrain() {
+        return Map.getInstance().getTerrain(posMapX, posMapY);
+    }
 
     public int getHealth() {
         return health;

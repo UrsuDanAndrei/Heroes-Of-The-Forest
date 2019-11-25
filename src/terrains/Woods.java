@@ -8,12 +8,12 @@ import heroes.Rogue;
 import heroes.Wizard;
 
 public class Woods extends Terrain {
-    public final static float PYROMANCER_MODIFIER = 0f;
-    public final static float KNIGHT_MODIFIER = 0f;
-    public final static float WIZARD_MODIFIER = 0f;
+    public final static float PYROMANCER_MODIFIER = 1.0f;
+    public final static float KNIGHT_MODIFIER = 1.0f;
+    public final static float WIZARD_MODIFIER = 1.0f;
     public final static float ROGUE_MODIFIER = 1.15f;
 
-    private final static int NO_ROUNDS_STUN = 6;
+    private final static int NO_ROUNDS_PARALYSIS = 6;
     private final static float BACKSTAB_BONUS_DAMAGE = 1.5f;
 
     @Override
@@ -37,12 +37,12 @@ public class Woods extends Terrain {
     }
 
     @Override
-    public int getNoRoundsStun(Paralysis paralysis) {
-        return NO_ROUNDS_STUN;
+    public int getTerrainAbilityModifier(Paralysis paralysis) {
+        return NO_ROUNDS_PARALYSIS;
     }
 
     @Override
-    public float getBonusDamage(Backstab backstab) {
+    public float getTerrainAbilityModifier(Backstab backstab) {
         return BACKSTAB_BONUS_DAMAGE;
     }
 }

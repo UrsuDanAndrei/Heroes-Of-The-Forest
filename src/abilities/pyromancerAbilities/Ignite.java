@@ -60,7 +60,13 @@ public class Ignite extends PyromancerAbility implements OvertimeAbility {
 
     private void affectHero(Hero hero, float heroModifier) {
         float terrainModifier = caster.getTerrainModifier();
-        float finalDamage =
-        hero.setOvertimeEffect(new Burn());
+        float finalDamage = damage * heroModifier * terrainModifier;
+
+        hero.setHealth(hero.getHealth() - Math.round(finalDamage));
+
+        float burnDamage = INITIAL_BURN_DAMAGE + BONUS_BURN_DAMAGE_LEVEL_UP * level;
+        float finalBurnDamage = burnDamage * heroModifier * terrainModifier;
+
+        hero.setOvertimeEffect(new Burn(NO_ROUNDS_BURN, Math.round(finalBurnDamage)));
     }
 }

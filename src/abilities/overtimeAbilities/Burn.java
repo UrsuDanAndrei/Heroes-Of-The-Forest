@@ -6,11 +6,7 @@ import heroes.*;
 public class Burn extends OvertimeEffect {
     private int damage;
 
-//    public Burn(Ignite ignite) {
-//        super();
-//    }
-
-    public Burn(int damage, int noRounds) {
+    public Burn(int noRounds, int damage) {
         super(noRounds);
         this.damage = damage;
     }

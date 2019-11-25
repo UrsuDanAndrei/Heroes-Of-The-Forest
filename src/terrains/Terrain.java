@@ -13,6 +13,6 @@ public abstract class Terrain {
     public abstract float getTerrainModifier(Wizard wizard);
     public abstract float getTerrainModifier(Rogue rogue);
 
-    public abstract int getNoRoundsStun(Paralysis paralysis);
-    public abstract float getBonusDamage(Backstab backstab);
+    public abstract int getTerrainAbilityModifier(Paralysis paralysis);
+    public abstract float getTerrainAbilityModifier(Backstab backstab);
 }

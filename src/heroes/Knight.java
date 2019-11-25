@@ -13,6 +13,11 @@ public class Knight extends Hero {
     private static final int BONUS_HEALTH_LEVEL_UP = 80;
 
     @Override
+    public int getMaxHealth() {
+        return INITIAL_HEALTH + BONUS_HEALTH_LEVEL_UP * level;
+    }
+
+    @Override
     public void checkLevelUp() {
         while (xp >= Constants.LEVEL1_XP_THRESHOLD + level * Constants.ADDITIONAL_XP_TO_LEVEL_UP) {
             ++level;
