@@ -1,8 +1,8 @@
 package abilities.knightAbilities;
 
-import abilities.overtimeAbilities.OvertimeAbility;
-import abilities.overtimeAbilities.OvertimeEffect;
-import abilities.overtimeAbilities.Stun;
+import abilities.OvertimeAbility;
+import abilities.overtimeEffects.OvertimeEffect;
+import abilities.overtimeEffects.Stun;
 import heroes.*;
 
 public class Slam extends KnightAbility implements OvertimeAbility {

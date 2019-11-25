@@ -1,8 +1,8 @@
 package abilities.rogueAbilities;
 
-import abilities.overtimeAbilities.OvertimeAbility;
-import abilities.overtimeAbilities.OvertimeEffect;
-import abilities.overtimeAbilities.Paralyse;
+import abilities.OvertimeAbility;
+import abilities.overtimeEffects.OvertimeEffect;
+import abilities.overtimeEffects.Paralyse;
 import heroes.*;
 
 public class Paralysis extends RogueAbility implements OvertimeAbility {

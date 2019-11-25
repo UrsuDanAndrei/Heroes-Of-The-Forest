@@ -10,6 +10,8 @@ import heroes.Knight;
 import heroes.Pyromancer;
 import input.GameInput;
 import input.GameInputReader;
+import output.GameOutput;
+import output.GameOutputWriter;
 import terrains.Terrain;
 import terrains.Volcanic;
 import terrains.Woods;
@@ -56,6 +58,11 @@ public class Main {
                 }
             }
         }
+
+        GameOutput gameOutput = new GameOutput(heroes);
+        GameOutputWriter gameOutputWriter = new GameOutputWriter(args[0], args[1]);
+
+        gameOutputWriter.write(gameOutput);
     }
 
     private static boolean samePosition(Hero hero1, Hero hero2) {

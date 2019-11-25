@@ -1,12 +1,9 @@
 package abilities.pyromancerAbilities;
 
-import abilities.overtimeAbilities.Burn;
-import abilities.overtimeAbilities.OvertimeAbility;
-import abilities.overtimeAbilities.OvertimeEffect;
-import common.Map;
+import abilities.overtimeEffects.Burn;
+import abilities.OvertimeAbility;
+import abilities.overtimeEffects.OvertimeEffect;
 import heroes.*;
-
-import java.awt.image.ImageProducer;
 
 public class Ignite extends PyromancerAbility implements OvertimeAbility {
     private static final float ROGUE_MODIFIER = 0.8f;

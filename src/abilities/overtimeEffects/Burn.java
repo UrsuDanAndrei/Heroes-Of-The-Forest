@@ -1,11 +1,11 @@
-package abilities.overtimeAbilities;
+package abilities.overtimeEffects;
 
-import heroes.Hero;
+import heroes.*;
 
-public class Paralyse extends OvertimeEffect {
+public class Burn extends OvertimeEffect {
     private int damage;
 
-    public Paralyse(int damage, int noRounds) {
+    public Burn(int noRounds, int damage) {
         super(noRounds);
         this.damage = damage;
     }
@@ -13,7 +13,6 @@ public class Paralyse extends OvertimeEffect {
     @Override
     public void overtimeAffectHero(Hero hero) {
         --noRounds;
-        hero.setStunned(true);
         hero.setHealth(hero.getHealth() - damage);
     }
 }

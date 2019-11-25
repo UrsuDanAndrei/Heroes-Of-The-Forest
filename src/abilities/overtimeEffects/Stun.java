@@ -1,6 +1,5 @@
-package abilities.overtimeAbilities;
+package abilities.overtimeEffects;
 
-import abilities.knightAbilities.Slam;
 import heroes.*;
 
 public class Stun extends OvertimeEffect {

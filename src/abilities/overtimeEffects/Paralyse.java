@@ -1,12 +1,11 @@
-package abilities.overtimeAbilities;
+package abilities.overtimeEffects;
 
-import abilities.pyromancerAbilities.Ignite;
-import heroes.*;
+import heroes.Hero;
 
-public class Burn extends OvertimeEffect {
+public class Paralyse extends OvertimeEffect {
     private int damage;
 
-    public Burn(int noRounds, int damage) {
+    public Paralyse(int damage, int noRounds) {
         super(noRounds);
         this.damage = damage;
     }
@@ -14,6 +13,7 @@ public class Burn extends OvertimeEffect {
     @Override
     public void overtimeAffectHero(Hero hero) {
         --noRounds;
+        hero.setStunned(true);
         hero.setHealth(hero.getHealth() - damage);
     }
 }

@@ -1,4 +1,4 @@
-package abilities.overtimeAbilities;
+package abilities.overtimeEffects;
 
 import heroes.*;
 

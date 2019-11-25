@@ -2,7 +2,7 @@ package heroes;
 
 import java.util.List;
 import abilities.Ability;
-import abilities.overtimeAbilities.OvertimeEffect;
+import abilities.overtimeEffects.OvertimeEffect;
 import common.Constants;
 import common.Map;
 import terrains.Terrain;
@@ -48,6 +48,27 @@ public abstract class Hero {
 
     public Terrain getTerrain() {
         return Map.getInstance().getTerrain(posMapX, posMapY);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        if (dead) {
+            sb.append("dead");
+        } else {
+            sb.append(level);
+            sb.append(" ");
+            sb.append(xp);
+            sb.append(" ");
+            sb.append(health);
+            sb.append(" ");
+            sb.append(posMapX);
+            sb.append(" ");
+            sb.append(posMapY);
+        }
+
+        return sb.toString();
     }
 
     public int getHealth() {

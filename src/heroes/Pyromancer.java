@@ -1,10 +1,8 @@
 package heroes;
 
 import abilities.Ability;
-import abilities.overtimeAbilities.OvertimeEffect;
 import common.Constants;
 import common.Map;
-import terrains.Terrain;
 
 import java.util.List;
 
@@ -46,5 +44,10 @@ public class Pyromancer extends Hero {
     @Override
     public void getAffectedByOvertimeEffect() {
         overtimeEffect.overtimeAffectHero(this);
+    }
+
+    @Override
+    public String toString() {
+        return "P " + super.toString();
     }
 }
