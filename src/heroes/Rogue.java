@@ -1,6 +1,9 @@
 package heroes;
 
 import abilities.Ability;
+import abilities.overtimeAbilities.OvertimeEffect;
+import common.Map;
+import terrains.Terrain;
 
 import java.util.List;
 
@@ -15,5 +18,15 @@ public class Rogue extends Hero {
     @Override
     public void getAffectedByAbility(Ability ability) {
         ability.affectHero(this);
+    }
+
+    @Override
+    public float getTerrainModifier() {
+        return Map.getInstance().getTerrain(posMapX, posMapY).getTerrainModifier(this);
+    }
+
+    @Override
+    public void getAffectedByOvertimeEffect() {
+        overtimeEffect.overtimeAffectHero(this);
     }
 }

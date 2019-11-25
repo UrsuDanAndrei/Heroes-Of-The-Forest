@@ -7,8 +7,9 @@ import heroes.Wizard;
 import heroes.Rogue;
 
 public abstract class Ability {
-    // protected Hero caster;
+    protected Hero caster;
     protected int level;
+    protected int damage;
 
     public abstract void affectHero(Pyromancer pyro);
     public abstract void affectHero(Knight knight);
@@ -16,4 +17,12 @@ public abstract class Ability {
     public abstract void affectHero(Rogue rogue);
 
     public abstract void levelUp();
+
+    public Hero getCaster() {
+        return caster;
+    }
+
+    public void setCaster(Hero caster) {
+        this.caster = caster;
+    }
 }

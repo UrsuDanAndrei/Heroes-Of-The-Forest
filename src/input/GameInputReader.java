@@ -17,7 +17,7 @@ public class GameInputReader {
 
     private int noHeroes;
     private int noRounds;
-    private List<String> roundsMoves;
+    private List<String> moves;
     private List<Hero> heroes;
     private Map map;
 
@@ -76,12 +76,12 @@ public class GameInputReader {
                 heroes.add(hero);
             }
 
-            // setting up roundsMoves
+            // setting up moves
             noRounds = fs.nextInt();
-            roundsMoves = new ArrayList<>(noRounds);
+            moves = new ArrayList<>(noRounds);
 
             for (int i = 0; i < noRounds; i++) {
-                roundsMoves.add(fs.nextWord());
+                moves.add(fs.nextWord());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,8 +96,8 @@ public class GameInputReader {
         return noRounds;
     }
 
-    public List<String> getRoundsMoves() {
-        return roundsMoves;
+    public List<String> getMoves() {
+        return moves;
     }
 
     public List<Hero> getHeroes() {

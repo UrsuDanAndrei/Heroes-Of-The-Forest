@@ -6,6 +6,10 @@ import heroes.Rogue;
 import heroes.Wizard;
 
 public class Execute extends KnightAbility {
+    public static final float ROGUE_MODIFIER = ;
+    public static final float KNIGHT_MODIFIER = ;
+    public static final float PYROMANCER_MODIFIER = -0.10f;
+    public static final float WIZARD_MODIFIER = ;
     @Override
     public void levelUp() {
 
@@ -13,6 +17,7 @@ public class Execute extends KnightAbility {
 
     @Override
     public void affectHero(Pyromancer pyro) {
+        // public final int RaceModifier
         // TODO
     }
 

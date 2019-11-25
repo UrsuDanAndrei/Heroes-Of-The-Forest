@@ -16,49 +16,7 @@ public class Map {
     private int dimX;
     private int dimY;
 
-    private List<ArrayList<MapCell>> mapMatrix;
-
-    private class MapCell {
-        private Terrain terrain;
-        private List<Hero> inCellHeroes;
-
-        MapCell(char terrainChar) {
-            inCellHeroes = new ArrayList<>();
-            TerrainFactory terrainFactory = TerrainFactory.getInstance();
-
-            switch (terrainChar) {
-                case 'L':
-                    terrain = terrainFactory.createTerrain(TerrainTypes.LAND);
-                    break;
-                case 'V':
-                    terrain = terrainFactory.createTerrain(TerrainTypes.VOLCANIC);
-                    break;
-                case 'D':
-                    terrain = terrainFactory.createTerrain(TerrainTypes.DESERT);
-                    break;
-                case 'W':
-                    terrain = terrainFactory.createTerrain(TerrainTypes.WOODS);
-                    break;
-                default:
-                    terrain = null;
-                    break;
-            }
-        }
-
-        private void addHero(Hero hero) {
-            inCellHeroes.add(hero);
-        }
-
-        private void removeHero(Hero hero) {
-            ListIterator<Hero> it = inCellHeroes.listIterator();
-
-            while(it.hasNext()) {
-                if (hero == it.next()) {
-                    it.remove();
-                }
-            }
-        }
-    }
+    private List<ArrayList<Terrain>> mapMatrix;
 
     private Map() {
 
@@ -89,23 +47,46 @@ public class Map {
 
     private void setMapMatrix(List<String> charMatrix) {
         mapMatrix = new ArrayList<>(dimX);
+        TerrainFactory terrainFactory = TerrainFactory.getInstance();
+
         for (int i = 0; i < dimX; i++) {
-            ArrayList<MapCell> row = new ArrayList<>(dimY);
+            ArrayList<Terrain> row = new ArrayList<>(dimY);
+
             for (int j = 0; j < dimY; j++) {
-                row.add(new MapCell(charMatrix.get(i).charAt(j)));
+                Terrain terrain;
+
+                switch (charMatrix.get(i).charAt(j)) {
+                    case 'L':
+                        terrain = terrainFactory.createTerrain(TerrainTypes.LAND);
+                        break;
+                    case 'V':
+                        terrain = terrainFactory.createTerrain(TerrainTypes.VOLCANIC);
+                        break;
+                    case 'D':
+                        terrain = terrainFactory.createTerrain(TerrainTypes.DESERT);
+                        break;
+                    case 'W':
+                        terrain = terrainFactory.createTerrain(TerrainTypes.WOODS);
+                        break;
+                    default:
+                        terrain = null;
+                        break;
+                }
+
+                row.add(terrain);
             }
+
             mapMatrix.add(row);
         }
     }
 
     public Terrain getTerrain(int x, int y) {
-        return mapMatrix.get(x).get(y).terrain;
+        return mapMatrix.get(x).get(y);
     }
 
     public void moveHero(Hero hero, char move) {
         int posHeroX = hero.getPosMapX();
         int posHeroY = hero.getPosMapY();
-        mapMatrix.get(posHeroX).get(posHeroY).removeHero(hero);
 
         switch (move) {
             case 'U':
@@ -124,15 +105,6 @@ public class Map {
 
         hero.setPosMapX(posHeroX);
         hero.setPosMapY(posHeroY);
-        mapMatrix.get(posHeroX).get(posHeroY).addHero(hero);
-    }
-
-    public int getNoHeroes(int posMapX, int posMapY) {
-        return mapMatrix.get(posMapX).get(posMapY).inCellHeroes.size();
-    }
-
-    public List<Hero> getHeroes(int posMapX, int posMapY) {
-        return mapMatrix.get(posMapX).get(posMapY).inCellHeroes;
     }
 
     public int getDimX() {
@@ -143,7 +115,7 @@ public class Map {
         return dimY;
     }
 
-    public List<ArrayList<MapCell>> getMapMatrix() {
+    public List<ArrayList<Terrain>> getMapMatrix() {
         return mapMatrix;
     }
 }

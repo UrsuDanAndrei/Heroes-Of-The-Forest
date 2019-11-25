@@ -3,13 +3,16 @@ package heroes;
 import java.util.List;
 import abilities.Ability;
 import abilities.overtimeAbilities.OvertimeEffect;
+import common.Constants;
+import terrains.Terrain;
 
 public abstract class Hero {
     protected int health;
-    protected int damage;
     protected int level;
     protected int id;
     protected int xp;
+    protected boolean stunned;
+    protected boolean dead;
 
     protected int posMapX;
     protected int posMapY;
@@ -27,7 +30,27 @@ public abstract class Hero {
         this.abilities = abilities;
     }
 
+    public abstract float getTerrainModifier();
+
     public abstract void getAffectedByAbility(Ability ability);
+
+    public abstract void getAffectedByOvertimeEffect();
+
+    public void bonusXpForKill(Hero hero2) {
+        xp += Math.max(0,
+                Constants.BONUS_XP - (level - hero2.getLevel()) * Constants.LEVEL_FACTOR_BONUS_XP);
+        levelUp();
+    }
+
+    public void levelUp() {
+        if (xp >= Constants.LEVEL1_XP_THRESHOLD + level * Constants.ADDITIONAL_XP_TO_NEXT_LEVEL) {
+            ++level;
+            for (Ability ability : abilities) {
+                ability.levelUp();
+            }
+        }
+    }
+
 
     public int getHealth() {
         return health;
@@ -35,14 +58,6 @@ public abstract class Hero {
 
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
     }
 
     public int getLevel() {
@@ -95,6 +110,18 @@ public abstract class Hero {
 
     public void setXp(int xp) {
         this.xp = xp;
+    }
+
+    public boolean isStunned() {
+        return stunned;
+    }
+
+    public void setStunned(boolean stunned) {
+        this.stunned = stunned;
+    }
+
+    public boolean isDead() {
+        return health <= 0;
     }
 
     public void setOvertimeEffect(OvertimeEffect overtimeEffect) {
