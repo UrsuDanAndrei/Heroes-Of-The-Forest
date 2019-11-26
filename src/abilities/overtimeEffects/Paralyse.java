@@ -5,7 +5,7 @@ import heroes.Hero;
 public class Paralyse extends OvertimeEffect {
     private int damage;
 
-    public Paralyse(int damage, int noRounds) {
+    public Paralyse(int noRounds, int damage) {
         super(noRounds);
         this.damage = damage;
     }

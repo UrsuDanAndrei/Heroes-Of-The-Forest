@@ -43,7 +43,9 @@ public class Knight extends Hero {
 
     @Override
     public void getAffectedByOvertimeEffect() {
-        overtimeEffect.overtimeAffectHero(this);
+        if (overtimeEffect != null) {
+            overtimeEffect.overtimeAffectHero(this);
+        }
     }
 
     @Override

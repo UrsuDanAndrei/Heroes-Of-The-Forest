@@ -57,6 +57,8 @@ public class Backstab extends RogueAbility {
 
         float finalDamage = damage * heroModifier * terrainModifier * criticalHitModifier;
 
+
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
+        System.out.println(hero.getHealth() + "ssssssssss");
     }
 }

@@ -13,7 +13,6 @@ public abstract class Hero {
     protected int id;
     protected int xp;
     protected boolean stunned;
-    protected boolean dead;
 
     protected int posMapX;
     protected int posMapY;
@@ -41,9 +40,9 @@ public abstract class Hero {
 
     public abstract void checkLevelUp();
 
-    public void bonusXpForKill(Hero hero2) {
+    public void bonusXpForKill(Hero hero) {
         xp += Math.max(0,
-                Constants.BONUS_XP - (level - hero2.getLevel()) * Constants.LEVEL_FACTOR_BONUS_XP);
+                Constants.BONUS_XP - (level - hero.getLevel()) * Constants.LEVEL_FACTOR_BONUS_XP);
     }
 
     public Terrain getTerrain() {
@@ -54,7 +53,7 @@ public abstract class Hero {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        if (dead) {
+        if (isDead()) {
             sb.append("dead");
         } else {
             sb.append(level);

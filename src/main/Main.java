@@ -31,6 +31,7 @@ public class Main {
         List<String> moves = gameInput.getMoves();
 
         for (int round = 0; round < noRounds; ++round) {
+            System.out.println("-------------");
             for (int heroIndex = 0; heroIndex < noHeroes; ++heroIndex) {
                 Hero hero = heroes.get(heroIndex);
 
@@ -53,7 +54,12 @@ public class Main {
                     Hero hero2 = heroes.get(j);
 
                     if (samePosition(hero1, hero2) && bothAlive(hero1, hero2)) {
+                        System.out.println("Before fight " + round);
                         fight(hero1, hero2);
+                        System.out.println("After fight");
+                        System.out.println(hero1);
+                        System.out.println(hero2);
+                        System.out.println();
                     }
                 }
             }
@@ -63,6 +69,7 @@ public class Main {
         GameOutputWriter gameOutputWriter = new GameOutputWriter(args[0], args[1]);
 
         gameOutputWriter.write(gameOutput);
+        gameOutputWriter.close();
     }
 
     private static boolean samePosition(Hero hero1, Hero hero2) {
@@ -77,12 +84,17 @@ public class Main {
         List<Ability> abilities1 = hero1.getAbilities();
         List<Ability> abilities2 = hero2.getAbilities();
 
+        System.out.println(hero1);
+        System.out.println(hero2);
+        System.out.println();
+
         for (Ability ability : abilities1) {
             hero2.getAffectedByAbility(ability);
 
             if (hero2.isDead()) {
                 hero1.bonusXpForKill(hero2);
-                hero2.checkLevelUp();
+                hero1.checkLevelUp();
+                break;
             }
         }
 
@@ -90,8 +102,9 @@ public class Main {
             hero1.getAffectedByAbility(ability);
 
             if (hero1.isDead()) {
-                hero1.bonusXpForKill(hero2);
-                hero1.checkLevelUp();
+                hero2.bonusXpForKill(hero1);
+                hero2.checkLevelUp();
+                break;
             }
         }
     }
