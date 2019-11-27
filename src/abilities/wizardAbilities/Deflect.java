@@ -10,23 +10,11 @@ public class Deflect extends WizardAbility {
     private static final float KNIGHT_MODIFIER = 1.4f;
     private static final float PYROMANCER_MODIFIER = 1.3f;
 
-    private static final float INITIAL_ENEMY_HEALTH_PERCENT = 0.35f;
-    private static final float BONUS_ENEMY_HEALTH_PERCENT_LEVEL_UP = 0.02f;
-    private static final float MAX_ENEMY_HEALTH_PERCENT = 0.7f;
+    private static final float INITIAL_DEFLECT_PERCENT = 0.35f;
+    private static final float BONUS_DEFLECT_PERCENT_LEVEL_UP = 0.02f;
+    private static final float MAX_DEFLECT_PERCENT = 0.7f;
 
-    private float enemyHealthPercent;
-
-    public Deflect() {
-        damage = 0;
-        enemyHealthPercent = INITIAL_ENEMY_HEALTH_PERCENT;
-    }
-
-    @Override
-    public void levelUp() {
-        ++level;
-        enemyHealthPercent = Math.min(MAX_ENEMY_HEALTH_PERCENT,
-                INITIAL_ENEMY_HEALTH_PERCENT + BONUS_ENEMY_HEALTH_PERCENT_LEVEL_UP * level);
-    }
+    private float deflectPercent;
 
     @Override
     public void affectHero(Pyromancer pyro) {
@@ -54,13 +42,17 @@ public class Deflect extends WizardAbility {
 
         for (Ability ability : abilities) {
             deflectedDamage += ability.getDamage();
-            System.out.println(deflectedDamage + " sssssssssss");
         }
 
-        float terrainModifier = caster.getTerrainModifier();
-        float finalDamage = deflectedDamage * enemyHealthPercent * heroModifier * terrainModifier;
-
+        float finalDamage = deflectedDamage * deflectPercent * heroModifier;
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
-        System.out.println(Math.round(finalDamage));
+    }
+
+    @Override
+    public void updateAbility() {
+        deflectPercent = Math.min(MAX_DEFLECT_PERCENT,
+                INITIAL_DEFLECT_PERCENT + BONUS_DEFLECT_PERCENT_LEVEL_UP * caster.getLevel())
+                * caster.getTerrainModifier();
+        damage = 0;
     }
 }

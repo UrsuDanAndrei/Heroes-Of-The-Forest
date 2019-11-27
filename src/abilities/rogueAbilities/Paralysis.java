@@ -15,20 +15,11 @@ public class Paralysis extends RogueAbility implements OvertimeAbility {
     private static final int BONUS_DAMAGE_LEVEL_UP = 10;
 
     private Paralyse paralyse;
-
-    public Paralysis() {
-        damage = INITIAL_DAMAGE;
-    }
+    private int noRoundsParalyse;
 
     @Override
     public OvertimeEffect getOvertimeEffect() {
         return paralyse;
-    }
-
-    @Override
-    public void levelUp() {
-        ++level;
-        damage = INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * level;
     }
 
     @Override
@@ -52,13 +43,16 @@ public class Paralysis extends RogueAbility implements OvertimeAbility {
     }
 
     private void affectHero(Hero hero, float heroModifier) {
-        float terrainModifier = caster.getTerrainModifier();
-        float finalDamage = damage * heroModifier * terrainModifier;
-
-        int noRounds = caster.getTerrain().getTerrainAbilityModifier(this);
+        float finalDamage = damage * heroModifier;
 
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
-        hero.setOvertimeEffect(new Paralyse(noRounds, Math.round(finalDamage)));
-        System.out.println("Paralysis: " + Math.round(finalDamage));
+        hero.setOvertimeEffect(new Paralyse(noRoundsParalyse, Math.round(finalDamage)));
+    }
+
+    @Override
+    public void updateAbility() {
+        noRoundsParalyse = caster.getTerrain().getTerrainAbilityModifier(this);
+        damage = (INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * caster.getLevel())
+                * caster.getTerrainModifier();
     }
 }

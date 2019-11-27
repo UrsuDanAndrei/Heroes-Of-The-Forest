@@ -14,29 +14,6 @@ public class Backstab extends RogueAbility {
     private static final int CRITICAL_HIT_PERIOD = 3;
 
     private int countHits;
-    private float criticalHit;
-
-    public Backstab() {
-        damage = INITIAL_DAMAGE;
-        criticalHit = 1.0f;
-    }
-
-    @Override
-    public int getDamage() {
-        System.out.println(damage + " " + caster.getTerrainModifier() + " " + criticalHit);
-        // verifying if a critical hit is about to happen
-        if (countHits % CRITICAL_HIT_PERIOD == 0) {
-            criticalHit = caster.getTerrain().getTerrainAbilityModifier(this);
-        }
-
-        return Math.round(damage * caster.getTerrainModifier() * criticalHit);
-    }
-
-    @Override
-    public void levelUp() {
-        ++level;
-        damage = INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * level;
-    }
 
     @Override
     public void affectHero(Pyromancer pyro) {
@@ -59,17 +36,20 @@ public class Backstab extends RogueAbility {
     }
 
     private void affectHero(Hero hero, float heroModifier) {
-        if (countHits % CRITICAL_HIT_PERIOD == 0) {
-            criticalHit = caster.getTerrain().getTerrainAbilityModifier(this);
-        } else {
-            criticalHit = 1.0f;
-        }
         ++countHits;
 
-        float terrainModifier = caster.getTerrainModifier();
-        float finalDamage = damage * heroModifier * terrainModifier * criticalHit;
-
+        float finalDamage = damage * heroModifier;
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
-        System.out.println("Backstab: " + Math.round(finalDamage));
+    }
+
+    @Override
+    public void updateAbility() {
+        float criticalHit = 1.0f;
+        if (countHits % CRITICAL_HIT_PERIOD == 0) {
+            criticalHit = caster.getTerrain().getTerrainAbilityModifier(this);
+        }
+
+        damage = (INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * caster.getLevel())
+                * caster.getTerrainModifier() * criticalHit;
     }
 }

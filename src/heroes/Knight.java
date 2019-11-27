@@ -22,9 +22,6 @@ public class Knight extends Hero {
             if (!isDead()) {
                 health = INITIAL_HEALTH + BONUS_HEALTH_LEVEL_UP * level;
             }
-            for (Ability ability : abilities) {
-                ability.levelUp();
-            }
         }
     }
 

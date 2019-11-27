@@ -15,4 +15,9 @@ public abstract class Terrain {
 
     public abstract int getTerrainAbilityModifier(Paralysis paralysis);
     public abstract float getTerrainAbilityModifier(Backstab backstab);
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

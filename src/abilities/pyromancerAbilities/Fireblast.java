@@ -11,16 +11,6 @@ public class Fireblast extends PyromancerAbility {
     private static final int INITIAL_DAMAGE = 350;
     private static final int BONUS_DAMAGE_LEVEL_UP = 50;
 
-    public Fireblast() {
-        damage = INITIAL_DAMAGE;
-    }
-
-    @Override
-    public void levelUp() {
-        ++level;
-        damage = INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * level;
-    }
-
     @Override
     public void affectHero(Pyromancer pyro) {
         affectHero(pyro, PYROMANCER_MODIFIER);
@@ -42,9 +32,13 @@ public class Fireblast extends PyromancerAbility {
     }
 
     private void affectHero(Hero hero, float heroModifier) {
-        float terrainModifier = caster.getTerrainModifier();
-        float finalDamage = damage * heroModifier * terrainModifier;
-
+        float finalDamage = damage * heroModifier;
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
+    }
+
+    @Override
+    public void updateAbility() {
+        damage = (INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * caster.getLevel())
+                * caster.getTerrainModifier();
     }
 }

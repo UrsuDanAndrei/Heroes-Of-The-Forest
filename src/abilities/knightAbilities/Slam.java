@@ -16,17 +16,7 @@ public class Slam extends KnightAbility implements OvertimeAbility {
 
     private static final int NO_ROUNDS_STUN = 1;
 
-    public OvertimeEffect overtimeEffect;
-
-    public Slam() {
-        damage = INITIAL_DAMAGE;
-    }
-
-    @Override
-    public void levelUp() {
-        ++level;
-        damage = INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * level;
-    }
+    private OvertimeEffect overtimeEffect;
 
     @Override
     public OvertimeEffect getOvertimeEffect() {
@@ -54,11 +44,14 @@ public class Slam extends KnightAbility implements OvertimeAbility {
     }
 
     private void affectHero(Hero hero, float heroModifier) {
-        float terrainModifier = caster.getTerrainModifier();
-        float finalDamage = damage * heroModifier * terrainModifier;
-
+        float finalDamage = damage * heroModifier;
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
         hero.setOvertimeEffect(new Stun(NO_ROUNDS_STUN));
-        System.out.println(Math.round(finalDamage));
+    }
+
+    @Override
+    public void updateAbility() {
+        damage = (INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * caster.getLevel())
+                * caster.getTerrainModifier();
     }
 }

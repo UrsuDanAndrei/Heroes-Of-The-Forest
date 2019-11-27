@@ -31,15 +31,23 @@ public class Main {
         List<String> moves = gameInput.getMoves();
 
         for (int round = 0; round < noRounds; ++round) {
-            System.out.println("-------------");
+            System.out.println("============");
             for (int heroIndex = 0; heroIndex < noHeroes; ++heroIndex) {
                 Hero hero = heroes.get(heroIndex);
+
+                if (heroIndex == 43) {
+                    System.out.println(hero);
+                }
 
                 if (hero.isDead()) {
                     continue;
                 }
 
                 hero.getAffectedByOvertimeEffect();
+
+                if (heroIndex == 43) {
+                    System.out.println("After overtime: " + hero);
+                }
 
                 if (hero.isStunned()) {
                     hero.setStunned(false);
@@ -54,12 +62,20 @@ public class Main {
                     Hero hero2 = heroes.get(j);
 
                     if (samePosition(hero1, hero2) && bothAlive(hero1, hero2)) {
-                        System.out.println("Before fight " + round);
+                        if (i == 43 || j == 43) {
+                            System.out.println("Before fight " + round + " " + hero1.getTerrain());
+                            System.out.println(hero1);
+                            System.out.println(hero2);
+                            System.out.println();
+                        }
                         fight(hero1, hero2);
-                        System.out.println("After fight");
-                        System.out.println(hero1);
-                        System.out.println(hero2);
-                        System.out.println();
+
+                        if (i == 43 || j == 43) {
+                            System.out.println("After fight");
+                            System.out.println(hero1);
+                            System.out.println(hero2);
+                            System.out.println();
+                        }
                     }
                 }
             }
@@ -84,9 +100,14 @@ public class Main {
         List<Ability> abilities1 = hero1.getAbilities();
         List<Ability> abilities2 = hero2.getAbilities();
 
-        System.out.println(hero1);
-        System.out.println(hero2);
-        System.out.println();
+        // update abilities
+        for (Ability ability : abilities1) {
+            ability.updateAbility();
+        }
+
+        for (Ability ability : abilities2) {
+            ability.updateAbility();
+        }
 
         for (Ability ability : abilities1) {
             hero2.getAffectedByAbility(ability);

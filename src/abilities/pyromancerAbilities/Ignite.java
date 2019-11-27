@@ -19,16 +19,7 @@ public class Ignite extends PyromancerAbility implements OvertimeAbility {
     private static final int NO_ROUNDS_BURN = 2;
 
     private Burn burn;
-
-    public Ignite() {
-        damage = INITIAL_DAMAGE;
-    }
-
-    @Override
-    public void levelUp() {
-        ++level;
-        damage = INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * level;
-    }
+    private float burnDamage;
 
     @Override
     public OvertimeEffect getOvertimeEffect() {
@@ -56,14 +47,18 @@ public class Ignite extends PyromancerAbility implements OvertimeAbility {
     }
 
     private void affectHero(Hero hero, float heroModifier) {
-        float terrainModifier = caster.getTerrainModifier();
-        float finalDamage = damage * heroModifier * terrainModifier;
-
+        float finalDamage = damage * heroModifier;
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
 
-        float burnDamage = INITIAL_BURN_DAMAGE + BONUS_BURN_DAMAGE_LEVEL_UP * level;
-        float finalBurnDamage = burnDamage * heroModifier * terrainModifier;
-
+        float finalBurnDamage = burnDamage * heroModifier;
         hero.setOvertimeEffect(new Burn(NO_ROUNDS_BURN, Math.round(finalBurnDamage)));
+    }
+
+    @Override
+    public void updateAbility() {
+        burnDamage = (INITIAL_BURN_DAMAGE + BONUS_BURN_DAMAGE_LEVEL_UP * caster.getLevel())
+                * caster.getTerrainModifier();
+        damage = (INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * caster.getLevel())
+                * caster.getTerrainModifier();
     }
 }

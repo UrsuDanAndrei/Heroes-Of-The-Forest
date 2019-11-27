@@ -45,4 +45,9 @@ public class Volcanic extends Terrain {
     public float getTerrainAbilityModifier(Backstab backstab) {
         return BACKSTAB_BONUS_DAMAGE;
     }
+
+    @Override
+    public String toString() {
+        return "Volcanic";
+    }
 }

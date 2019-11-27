@@ -11,33 +11,11 @@ public class Execute extends KnightAbility {
     private static final int INITIAL_DAMAGE = 200;
     private static final int BONUS_DAMAGE_LEVEL_UP = 30;
 
-    private static final float INITIAL_ENEMY_HEALTH_LIMIT = 0.2f;
-    private static final float BONUS_ENEMY_HEALTH_LIMIT_LEVEL_UP = 0.01f;
-    private static final float MAX_ENEMY_HEALTH_LIMIT = 0.4f;
+    private static final float INITIAL_HEALTH_LIMIT_PERCENT = 0.2f;
+    private static final float BONUS_HEALTH_LIMIT_PERCENT_LEVEL_UP = 0.01f;
+    private static final float MAX_HEALTH_LIMIT_PERCENT = 0.4f;
 
-    private float enemyHealthLimit;
-
-    public Execute() {
-        damage = INITIAL_DAMAGE;
-        enemyHealthLimit = INITIAL_ENEMY_HEALTH_LIMIT;
-    }
-
-    @Override
-    public void levelUp() {
-        ++level;
-        damage = INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * level;
-        enemyHealthLimit = Math.min(MAX_ENEMY_HEALTH_LIMIT,
-                INITIAL_ENEMY_HEALTH_LIMIT + BONUS_ENEMY_HEALTH_LIMIT_LEVEL_UP * level);
-    }
-
-    @Override
-    public int getDamage() {
-//        if (hero.getHealth() < hero.getMaxHealth() * enemyHealthLimit) {
-//            return hero.getHealth();
-//        }
-
-        return Math.round(damage * caster.getTerrainModifier());
-    }
+    private float healthLimitPercent;
 
     @Override
     public void affectHero(Pyromancer pyro) {
@@ -60,15 +38,19 @@ public class Execute extends KnightAbility {
     }
 
     private void affectHero(Hero hero, float heroModifier) {
-        if (hero.getHealth() < hero.getMaxHealth() * enemyHealthLimit) {
-            System.out.println(hero.getHealth());
+        if (hero.getHealth() < hero.getMaxHealth() * healthLimitPercent) {
             hero.setHealth(0);
         } else {
-            float terrainModifier = caster.getTerrainModifier();
-            float finalDamage = damage * heroModifier * terrainModifier;
-
+            float finalDamage = damage * heroModifier;
             hero.setHealth(hero.getHealth() - Math.round(finalDamage));
-            System.out.println(Math.round(finalDamage));
         }
+    }
+
+    @Override
+    public void updateAbility() {
+        healthLimitPercent = Math.min(MAX_HEALTH_LIMIT_PERCENT, INITIAL_HEALTH_LIMIT_PERCENT
+                + BONUS_HEALTH_LIMIT_PERCENT_LEVEL_UP * caster.getLevel());
+        damage = (INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * caster.getLevel())
+                * caster.getTerrainModifier();
     }
 }

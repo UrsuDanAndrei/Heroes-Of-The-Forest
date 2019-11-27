@@ -8,23 +8,12 @@ public class Drain extends WizardAbility {
     private static final float PYROMANCER_MODIFIER = 0.9f;
     private static final float WIZARD_MODIFIER = 1.05f;
 
-    private static final float INITIAL_ENEMY_HEALTH_PERCENT = 0.2f;
-    private static final float BONUS_ENEMY_HEALTH_PERCENT_LEVEL_UP = 0.05f;
+    private static final float INITIAL_HEALTH_PERCENT = 0.2f;
+    private static final float BONUS_HEALTH_PERCENT_LEVEL_UP = 0.05f;
 
-    private static final float MAX_HEALTH_PERCENT = 0.3f;
+    private static final float LIMIT_PERCENT = 0.3f;
 
-    private float enemyHealthPercent;
-
-    public Drain() {
-        damage = 0;
-        enemyHealthPercent = INITIAL_ENEMY_HEALTH_PERCENT;
-    }
-
-    @Override
-    public void levelUp() {
-        ++level;
-        enemyHealthPercent = INITIAL_ENEMY_HEALTH_PERCENT + BONUS_ENEMY_HEALTH_PERCENT_LEVEL_UP * level;
-    }
+    private float healthPercent;
 
     @Override
     public void affectHero(Pyromancer pyro) {
@@ -47,11 +36,15 @@ public class Drain extends WizardAbility {
     }
 
     private void affectHero(Hero hero, float heroModifier) {
-        float terrainModifier = caster.getTerrainModifier();
-        float finalDamage = enemyHealthPercent * heroModifier * terrainModifier
-                * Math.min(MAX_HEALTH_PERCENT * hero.getMaxHealth(), hero.getHealth());
-
+        float finalDamage = healthPercent * heroModifier
+                * Math.min(LIMIT_PERCENT * hero.getMaxHealth(), hero.getHealth());
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
-        System.out.println(Math.round(finalDamage));
+    }
+
+    @Override
+    public void updateAbility() {
+        healthPercent = (INITIAL_HEALTH_PERCENT + BONUS_HEALTH_PERCENT_LEVEL_UP * caster.getLevel())
+                * caster.getTerrainModifier();
+        damage = 0;
     }
 }

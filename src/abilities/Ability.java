@@ -9,14 +9,12 @@ import heroes.Rogue;
 public abstract class Ability {
     protected Hero caster;
     protected int level;
-    protected int damage;
+    protected float damage;
 
     public abstract void affectHero(Pyromancer pyro);
     public abstract void affectHero(Knight knight);
     public abstract void affectHero(Wizard wizard);
     public abstract void affectHero(Rogue rogue);
-
-    public abstract void levelUp();
 
     public Hero getCaster() {
         return caster;
@@ -31,6 +29,9 @@ public abstract class Ability {
     }
 
     public int getDamage() {
-        return Math.round(damage * caster.getTerrainModifier());
+        return Math.round(damage);
     }
+
+    public abstract void updateAbility();
+
 }
