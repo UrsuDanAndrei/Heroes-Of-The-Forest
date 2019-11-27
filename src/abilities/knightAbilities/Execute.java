@@ -31,12 +31,12 @@ public class Execute extends KnightAbility {
     }
 
     @Override
-    public int getDamage(Hero hero) {
-        if (hero.getHealth() < hero.getMaxHealth() * enemyHealthLimit) {
-            return hero.getHealth();
-        }
+    public int getDamage() {
+//        if (hero.getHealth() < hero.getMaxHealth() * enemyHealthLimit) {
+//            return hero.getHealth();
+//        }
 
-        return Math.round(damage * hero.getTerrainModifier());
+        return Math.round(damage * caster.getTerrainModifier());
     }
 
     @Override

@@ -46,7 +46,11 @@ public class Pyromancer extends Hero {
     @Override
     public void getAffectedByOvertimeEffect() {
         if (overtimeEffect != null) {
-            overtimeEffect.overtimeAffectHero(this);
+            if (overtimeEffect.getNoRounds() != 0) {
+                overtimeEffect.overtimeAffectHero(this);
+            } else {
+                overtimeEffect = null;
+            }
         }
     }
 

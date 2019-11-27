@@ -53,7 +53,7 @@ public class Deflect extends WizardAbility {
         float deflectedDamage = 0f;
 
         for (Ability ability : abilities) {
-            deflectedDamage += ability.getDamage(hero);
+            deflectedDamage += ability.getDamage();
             System.out.println(deflectedDamage + " sssssssssss");
         }
 
