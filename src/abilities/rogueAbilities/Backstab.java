@@ -19,10 +19,14 @@ public class Backstab extends RogueAbility {
         damage = INITIAL_DAMAGE;
     }
 
-//    @Override
-//    public int getDamage(Hero hero) {
-//        return Math.round(hero.)
-//    }
+    @Override
+    public int getDamage(Hero hero) {
+        float criticalHitModifier = 1.0f;
+        if (countHits % CRITICAL_HIT_PERIOD == 0) {
+            criticalHitModifier = caster.getTerrain().getTerrainAbilityModifier(this);
+        }
+        return Math.round(damage * hero.getTerrainModifier() * criticalHitModifier);
+    }
 
     @Override
     public void levelUp() {
