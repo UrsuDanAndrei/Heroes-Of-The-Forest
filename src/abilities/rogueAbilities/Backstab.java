@@ -19,6 +19,11 @@ public class Backstab extends RogueAbility {
         damage = INITIAL_DAMAGE;
     }
 
+//    @Override
+//    public int getDamage(Hero hero) {
+//        return Math.round(hero.)
+//    }
+
     @Override
     public void levelUp() {
         ++level;
@@ -46,7 +51,6 @@ public class Backstab extends RogueAbility {
     }
 
     private void affectHero(Hero hero, float heroModifier) {
-        ++countHits;
 
         float terrainModifier = caster.getTerrainModifier();
         float criticalHitModifier = 1.0f;
@@ -57,8 +61,9 @@ public class Backstab extends RogueAbility {
 
         float finalDamage = damage * heroModifier * terrainModifier * criticalHitModifier;
 
-
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
-        System.out.println(hero.getHealth() + "ssssssssss");
+        System.out.println("Backstab: " + Math.round(finalDamage));
+
+        ++countHits;
     }
 }

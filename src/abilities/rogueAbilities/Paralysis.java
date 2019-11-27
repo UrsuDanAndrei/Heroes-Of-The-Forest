@@ -59,5 +59,6 @@ public class Paralysis extends RogueAbility implements OvertimeAbility {
 
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
         hero.setOvertimeEffect(new Paralyse(noRounds, Math.round(finalDamage)));
+        System.out.println("Paralysis: " + Math.round(finalDamage));
     }
 }

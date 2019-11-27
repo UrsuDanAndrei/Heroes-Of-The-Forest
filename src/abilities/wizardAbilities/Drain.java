@@ -52,5 +52,6 @@ public class Drain extends WizardAbility {
                 * Math.min(MAX_HEALTH_PERCENT * hero.getMaxHealth(), hero.getHealth());
 
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
+        System.out.println(Math.round(finalDamage));
     }
 }

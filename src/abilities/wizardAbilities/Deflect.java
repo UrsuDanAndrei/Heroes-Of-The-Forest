@@ -53,12 +53,14 @@ public class Deflect extends WizardAbility {
         float deflectedDamage = 0f;
 
         for (Ability ability : abilities) {
-            deflectedDamage += ability.getDamage();
+            deflectedDamage += ability.getDamage(hero);
+            System.out.println(deflectedDamage + " sssssssssss");
         }
 
         float terrainModifier = caster.getTerrainModifier();
         float finalDamage = deflectedDamage * enemyHealthPercent * heroModifier * terrainModifier;
 
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
+        System.out.println(Math.round(finalDamage));
     }
 }

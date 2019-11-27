@@ -31,6 +31,15 @@ public class Execute extends KnightAbility {
     }
 
     @Override
+    public int getDamage(Hero hero) {
+        if (hero.getHealth() < hero.getMaxHealth() * enemyHealthLimit) {
+            return hero.getHealth();
+        }
+
+        return Math.round(damage * hero.getTerrainModifier());
+    }
+
+    @Override
     public void affectHero(Pyromancer pyro) {
         affectHero(pyro, PYROMANCER_MODIFIER);
     }
@@ -52,12 +61,14 @@ public class Execute extends KnightAbility {
 
     private void affectHero(Hero hero, float heroModifier) {
         if (hero.getHealth() < hero.getMaxHealth() * enemyHealthLimit) {
+            System.out.println(hero.getHealth());
             hero.setHealth(0);
         } else {
             float terrainModifier = caster.getTerrainModifier();
             float finalDamage = damage * heroModifier * terrainModifier;
 
             hero.setHealth(hero.getHealth() - Math.round(finalDamage));
+            System.out.println(Math.round(finalDamage));
         }
     }
 }

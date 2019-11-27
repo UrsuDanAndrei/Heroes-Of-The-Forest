@@ -90,22 +90,20 @@ public class Main {
 
         for (Ability ability : abilities1) {
             hero2.getAffectedByAbility(ability);
-
-            if (hero2.isDead()) {
-                hero1.bonusXpForKill(hero2);
-                hero1.checkLevelUp();
-                break;
-            }
         }
 
         for (Ability ability : abilities2) {
             hero1.getAffectedByAbility(ability);
+        }
 
-            if (hero1.isDead()) {
-                hero2.bonusXpForKill(hero1);
-                hero2.checkLevelUp();
-                break;
-            }
+        if (hero1.isDead()) {
+            hero2.bonusXpForKill(hero1);
+            hero2.checkLevelUp();
+        }
+
+        if (hero2.isDead()) {
+            hero1.bonusXpForKill(hero2);
+            hero1.checkLevelUp();
         }
     }
 }

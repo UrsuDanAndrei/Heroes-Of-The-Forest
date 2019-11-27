@@ -15,5 +15,6 @@ public class Paralyse extends OvertimeEffect {
         --noRounds;
         hero.setStunned(true);
         hero.setHealth(hero.getHealth() - damage);
+        System.out.println("Overtime Paralyse: " + damage);
     }
 }

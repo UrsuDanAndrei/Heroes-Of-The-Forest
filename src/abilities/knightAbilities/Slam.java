@@ -59,5 +59,6 @@ public class Slam extends KnightAbility implements OvertimeAbility {
 
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
         hero.setOvertimeEffect(new Stun(NO_ROUNDS_STUN));
+        System.out.println(Math.round(finalDamage));
     }
 }

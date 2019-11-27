@@ -30,7 +30,7 @@ public abstract class Ability {
         return level;
     }
 
-    public int getDamage() {
-        return damage;
+    public int getDamage(Hero hero) {
+        return Math.round(damage * hero.getTerrainModifier());
     }
 }

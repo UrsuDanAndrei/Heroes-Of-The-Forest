@@ -19,7 +19,11 @@ public class Rogue extends Hero {
     public void checkLevelUp() {
         while (xp >= Constants.LEVEL1_XP_THRESHOLD + level * Constants.ADDITIONAL_XP_TO_LEVEL_UP) {
             ++level;
-            health = INITIAL_HEALTH + BONUS_HEALTH_LEVEL_UP * level;
+
+            if (!isDead()) {
+                health = INITIAL_HEALTH + BONUS_HEALTH_LEVEL_UP * level;
+            }
+
             for (Ability ability : abilities) {
                 ability.levelUp();
             }
