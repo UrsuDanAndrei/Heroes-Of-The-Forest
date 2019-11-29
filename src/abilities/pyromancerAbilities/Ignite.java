@@ -3,9 +3,14 @@ package abilities.pyromancerAbilities;
 import abilities.overtimeEffects.Burn;
 import abilities.OvertimeAbility;
 import abilities.overtimeEffects.OvertimeEffect;
-import heroes.*;
 
-public class Ignite extends PyromancerAbility implements OvertimeAbility {
+import heroes.Hero;
+import heroes.Pyromancer;
+import heroes.Knight;
+import heroes.Wizard;
+import heroes.Rogue;
+
+public final class Ignite extends PyromancerAbility implements OvertimeAbility {
     private static final float ROGUE_MODIFIER = 0.8f;
     private static final float KNIGHT_MODIFIER = 1.2f;
     private static final float PYROMANCER_MODIFIER = 0.9f;
@@ -18,6 +23,7 @@ public class Ignite extends PyromancerAbility implements OvertimeAbility {
     private static final int BONUS_BURN_DAMAGE_LEVEL_UP = 30;
     private static final int NO_ROUNDS_BURN = 2;
 
+    // overtime effect
     private Burn burn;
     private float burnDamage;
 
@@ -27,30 +33,32 @@ public class Ignite extends PyromancerAbility implements OvertimeAbility {
     }
 
     @Override
-    public void affectHero(Pyromancer pyro) {
+    public void affectHero(final Pyromancer pyro) {
         affectHero(pyro, PYROMANCER_MODIFIER);
     }
 
     @Override
-    public void affectHero(Knight knight) {
+    public void affectHero(final Knight knight) {
         affectHero(knight, KNIGHT_MODIFIER);
     }
 
     @Override
-    public void affectHero(Wizard wizard) {
+    public void affectHero(final Wizard wizard) {
         affectHero(wizard, WIZARD_MODIFIER);
     }
 
     @Override
-    public void affectHero(Rogue rogue) {
+    public void affectHero(final Rogue rogue) {
         affectHero(rogue, ROGUE_MODIFIER);
     }
 
-    private void affectHero(Hero hero, float heroModifier) {
+    private void affectHero(final Hero hero, final float heroModifier) {
         float finalDamage = damage * heroModifier;
+        // damaging the enemy hero
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
-
         float finalBurnDamage = burnDamage * heroModifier;
+
+        // setting up a Burn on the enemy hero
         hero.setOvertimeEffect(new Burn(NO_ROUNDS_BURN, Math.round(finalBurnDamage)));
     }
 

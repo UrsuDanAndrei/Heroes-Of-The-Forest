@@ -1,15 +1,16 @@
 package abilities.overtimeEffects;
 
-import heroes.*;
+import heroes.Hero;
 
-public class Stun extends OvertimeEffect {
+// Slam's overtime effect, stuns the hero for one round
+public final class Stun extends OvertimeEffect {
 
-    public Stun(int noRounds) {
+    public Stun(final int noRounds) {
         super(noRounds);
     }
 
     @Override
-    public void overtimeAffectHero(Hero hero) {
+    public void overtimeAffectHero(final Hero hero) {
         --noRounds;
         hero.setStunned(true);
     }

@@ -4,10 +4,10 @@ import heroes.Hero;
 
 import java.util.List;
 
-public class GameOutput {
+public final class GameOutput {
     private List<Hero> heroes;
 
-    public GameOutput(List<Hero> heroes) {
+    public GameOutput(final List<Hero> heroes) {
         this.heroes = heroes;
     }
 

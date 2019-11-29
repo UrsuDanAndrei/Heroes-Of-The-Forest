@@ -6,9 +6,14 @@ import common.Map;
 
 import java.util.List;
 
-public class Wizard extends Hero {
+public final class Wizard extends Hero {
     private static final int INITIAL_HEALTH = 400;
     private static final int BONUS_HEALTH_LEVEL_UP = 30;
+
+    public Wizard(final int posMapX, final int posMapY, final List<Ability> abilities) {
+        super(posMapX, posMapY, abilities);
+        health = INITIAL_HEALTH;
+    }
 
     @Override
     public int getMaxHealth() {
@@ -20,18 +25,14 @@ public class Wizard extends Hero {
         while (xp >= Constants.LEVEL1_XP_THRESHOLD + level * Constants.ADDITIONAL_XP_TO_LEVEL_UP) {
             ++level;
             if (!isDead()) {
+                // restoring the wizard to his full health
                 health = INITIAL_HEALTH + BONUS_HEALTH_LEVEL_UP * level;
             }
         }
     }
 
-    public Wizard(int posMapX, int posMapY, List<Ability> abilities) {
-        super(posMapX, posMapY, abilities);
-        health = INITIAL_HEALTH;
-    }
-
     @Override
-    public void getAffectedByAbility(Ability ability) {
+    public void getAffectedByAbility(final Ability ability) {
         ability.affectHero(this);
     }
 

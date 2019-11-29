@@ -11,11 +11,11 @@ import heroes.HeroesFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameInputReader {
+public final class GameInputReader {
     private final String inputPath;
     private final String outputPath;
 
-    public GameInputReader(String inputPath, String outputPath) {
+    public GameInputReader(final String inputPath, final String outputPath) {
         this.inputPath = inputPath;
         this.outputPath = outputPath;
     }

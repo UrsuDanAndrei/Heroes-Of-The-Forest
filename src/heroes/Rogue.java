@@ -6,9 +6,14 @@ import common.Map;
 
 import java.util.List;
 
-public class Rogue extends Hero {
+public final class Rogue extends Hero {
     private static final int INITIAL_HEALTH = 600;
     private static final int BONUS_HEALTH_LEVEL_UP = 40;
+
+    public Rogue(final int posMapX, final int posMapY, final List<Ability> abilities) {
+        super(posMapX, posMapY, abilities);
+        health = INITIAL_HEALTH;
+    }
 
     @Override
     public int getMaxHealth() {
@@ -19,19 +24,16 @@ public class Rogue extends Hero {
     public void checkLevelUp() {
         while (xp >= Constants.LEVEL1_XP_THRESHOLD + level * Constants.ADDITIONAL_XP_TO_LEVEL_UP) {
             ++level;
+
             if (!isDead()) {
+                // restoring the rogue to his full health
                 health = INITIAL_HEALTH + BONUS_HEALTH_LEVEL_UP * level;
             }
         }
     }
 
-    public Rogue(int posMapX, int posMapY, List<Ability> abilities) {
-        super(posMapX, posMapY, abilities);
-        health = INITIAL_HEALTH;
-    }
-
     @Override
-    public void getAffectedByAbility(Ability ability) {
+    public void getAffectedByAbility(final Ability ability) {
         ability.affectHero(this);
     }
 

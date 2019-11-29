@@ -6,12 +6,12 @@ import java.util.List;
 
 import fileio.FileSystem;
 
-public class GameOutputWriter {
+public final class GameOutputWriter {
     private final String inputPath;
     private final String outputPath;
     private FileSystem fs;
 
-    public GameOutputWriter(String inputPath, String outputPath) {
+    public GameOutputWriter(final String inputPath, final String outputPath) {
         this.inputPath = inputPath;
         this.outputPath = outputPath;
 
@@ -22,7 +22,7 @@ public class GameOutputWriter {
         }
     }
 
-    public void write(GameOutput gameOutput) {
+    public void write(final GameOutput gameOutput) {
         List<Hero> heroes = gameOutput.getHeroes();
         for (Hero hero : heroes) {
             try {

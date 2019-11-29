@@ -10,7 +10,6 @@ import terrains.Terrain;
 public abstract class Hero {
     protected int health;
     protected int level;
-    protected int id;
     protected int xp;
     protected boolean stunned;
 
@@ -24,27 +23,31 @@ public abstract class Hero {
 
     }
 
-    public Hero(int posMapX, int posMapY, List<Ability> abilities) {
+    public Hero(final int posMapX, final int posMapY, final List<Ability> abilities) {
         this.posMapX = posMapX;
         this.posMapY = posMapY;
         this.abilities = abilities;
     }
 
-    public abstract float getTerrainModifier();
-
     public abstract void getAffectedByAbility(Ability ability);
 
+    // if the hero suffers from an overtime effect he will get affected by it
     public abstract void getAffectedByOvertimeEffect();
+
+    public abstract float getTerrainModifier();
 
     public abstract int getMaxHealth();
 
+    // leveling up according to the xp and the threshold for each level
     public abstract void checkLevelUp();
 
-    public void bonusXpForKill(Hero hero) {
+    // increase hero's experience according to the enemy he has killed
+    public void bonusXpForKill(final Hero hero) {
         xp += Math.max(0,
                 Constants.BONUS_XP - (level - hero.getLevel()) * Constants.LEVEL_FACTOR_BONUS_XP);
     }
 
+    // returns the terrain instance that is at hero's position on the map
     public Terrain getTerrain() {
         return Map.getInstance().getTerrain(posMapX, posMapY);
     }
@@ -70,6 +73,7 @@ public abstract class Hero {
         return sb.toString();
     }
 
+    // getters and setters
     public int getHealth() {
         return health;
     }
@@ -82,15 +86,11 @@ public abstract class Hero {
         return level;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
     public int getPosMapX() {
         return posMapX;
     }
 
-    public void setPosMapX(int posMapX) {
+    public void setPosMapX(final int posMapX) {
         this.posMapX = posMapX;
     }
 
@@ -98,7 +98,7 @@ public abstract class Hero {
         return posMapY;
     }
 
-    public void setPosMapY(int posMapY) {
+    public void setPosMapY(final int posMapY) {
         this.posMapY = posMapY;
     }
 
@@ -106,35 +106,15 @@ public abstract class Hero {
         return abilities;
     }
 
-    public void setAbilities(List<Ability> abilities) {
+    public void setAbilities(final List<Ability> abilities) {
         this.abilities = abilities;
-    }
-
-    public OvertimeEffect getOvertimeEffect() {
-        return overtimeEffect;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getXp() {
-        return xp;
-    }
-
-    public void setXp(int xp) {
-        this.xp = xp;
     }
 
     public boolean isStunned() {
         return stunned;
     }
 
-    public void setStunned(boolean stunned) {
+    public void setStunned(final boolean stunned) {
         this.stunned = stunned;
     }
 
@@ -142,7 +122,7 @@ public abstract class Hero {
         return health <= 0;
     }
 
-    public void setOvertimeEffect(OvertimeEffect overtimeEffect) {
+    public void setOvertimeEffect(final OvertimeEffect overtimeEffect) {
         this.overtimeEffect = overtimeEffect;
     }
 }

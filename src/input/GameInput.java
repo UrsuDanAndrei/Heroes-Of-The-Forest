@@ -5,7 +5,7 @@ import heroes.Hero;
 
 import java.util.List;
 
-public class GameInput {
+public final class GameInput {
     private int noHeroes;
     private int noRounds;
 
@@ -14,7 +14,8 @@ public class GameInput {
 
     private Map map;
 
-    public GameInput(int noHeroes, int noRounds, List<Hero> heroes, List<String> moves, Map map) {
+    public GameInput(final int noHeroes, final int noRounds, final List<Hero> heroes,
+                     final List<String> moves, final Map map) {
         this.noHeroes = noHeroes;
         this.noRounds = noRounds;
         this.heroes = heroes;

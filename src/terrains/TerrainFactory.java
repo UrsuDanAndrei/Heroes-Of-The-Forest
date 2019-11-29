@@ -15,7 +15,7 @@ public final class TerrainFactory {
         return instance;
     }
 
-    public Terrain createTerrain(TerrainTypes type) {
+    public Terrain createTerrain(final TerrainTypes type) {
         switch (type) {
             case LAND:
                 return new Land();

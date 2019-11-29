@@ -23,7 +23,7 @@ public final class AbilitiesFactory {
         return instance;
     }
 
-    public Ability creatAbility(AbilityTypes type) {
+    public Ability creatAbility(final AbilityTypes type) {
         switch (type) {
             case FIREBLAST:
                 return new Fireblast();

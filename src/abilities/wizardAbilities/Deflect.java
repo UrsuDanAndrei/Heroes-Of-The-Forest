@@ -1,11 +1,16 @@
 package abilities.wizardAbilities;
 
 import abilities.Ability;
-import heroes.*;
+
+import heroes.Hero;
+import heroes.Pyromancer;
+import heroes.Knight;
+import heroes.Wizard;
+import heroes.Rogue;
 
 import java.util.List;
 
-public class Deflect extends WizardAbility {
+public final class Deflect extends WizardAbility {
     private static final float ROGUE_MODIFIER = 1.2f;
     private static final float KNIGHT_MODIFIER = 1.4f;
     private static final float PYROMANCER_MODIFIER = 1.3f;
@@ -17,33 +22,35 @@ public class Deflect extends WizardAbility {
     private float deflectPercent;
 
     @Override
-    public void affectHero(Pyromancer pyro) {
+    public void affectHero(final Pyromancer pyro) {
         affectHero(pyro, PYROMANCER_MODIFIER);
     }
 
     @Override
-    public void affectHero(Knight knight) {
+    public void affectHero(final Knight knight) {
         affectHero(knight, KNIGHT_MODIFIER);
     }
 
     @Override
-    public void affectHero(Wizard wizard) {
+    public void affectHero(final Wizard wizard) {
         // this ability can not be applied to another wizard
     }
 
     @Override
-    public void affectHero(Rogue rogue) {
+    public void affectHero(final Rogue rogue) {
         affectHero(rogue, ROGUE_MODIFIER);
     }
 
-    private void affectHero(Hero hero, float heroModifier) {
+    private void affectHero(final Hero hero, final float heroModifier) {
         List<Ability> abilities = hero.getAbilities();
         float deflectedDamage = 0f;
 
+        // calculating the damage received by the caster in the current fight
         for (Ability ability : abilities) {
             deflectedDamage += ability.getDamage();
         }
 
+        // damaging the enemy hero with a portion of the damage taken by the caster
         float finalDamage = deflectedDamage * deflectPercent * heroModifier;
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
     }

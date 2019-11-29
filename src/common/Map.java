@@ -1,16 +1,15 @@
 package common;
 
 import heroes.Hero;
-import terrains.Land;
+
 import terrains.Terrain;
 import terrains.TerrainFactory;
 import terrains.TerrainTypes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
-public class Map {
+public final class Map {
     private static Map instance = null;
 
     private int dimX;
@@ -18,11 +17,12 @@ public class Map {
 
     private List<ArrayList<Terrain>> mapMatrix;
 
+    // singleton pattern
     private Map() {
 
     }
 
-    private Map(int dimX, int dimY,  List<String> charMatrix) {
+    private Map(final int dimX, final int dimY,  final List<String> charMatrix) {
         this.dimX = dimX;
         this.dimY = dimY;
 
@@ -37,7 +37,7 @@ public class Map {
         return instance;
     }
 
-    public static Map getInstance(int dimX, int dimY, List<String> charMatrix) {
+    public static Map getInstance(final int dimX, final int dimY, final List<String> charMatrix) {
         if (instance == null) {
             instance = new Map(dimX, dimY, charMatrix);
         }
@@ -45,7 +45,8 @@ public class Map {
         return instance;
     }
 
-    private void setMapMatrix(List<String> charMatrix) {
+    // transforms a char matrix into a terrain matrix
+    private void setMapMatrix(final List<String> charMatrix) {
         mapMatrix = new ArrayList<>(dimX);
         TerrainFactory terrainFactory = TerrainFactory.getInstance();
 
@@ -80,11 +81,13 @@ public class Map {
         }
     }
 
-    public Terrain getTerrain(int x, int y) {
+    // returns the terrain instances that is stored at (x, y) in matrix
+    public Terrain getTerrain(final int x, final int y) {
         return mapMatrix.get(x).get(y);
     }
 
-    public void moveHero(Hero hero, char move) {
+    // moves the hero as dictated by move
+    public void moveHero(final Hero hero, final char move) {
         int posHeroX = hero.getPosMapX();
         int posHeroY = hero.getPosMapY();
 
@@ -101,21 +104,11 @@ public class Map {
             case 'R':
                 ++posHeroY;
                 break;
+            default:
+                break;
         }
 
         hero.setPosMapX(posHeroX);
         hero.setPosMapY(posHeroY);
-    }
-
-    public int getDimX() {
-        return dimX;
-    }
-
-    public int getDimY() {
-        return dimY;
-    }
-
-    public List<ArrayList<Terrain>> getMapMatrix() {
-        return mapMatrix;
     }
 }

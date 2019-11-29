@@ -1,8 +1,12 @@
 package abilities.rogueAbilities;
 
-import heroes.*;
+import heroes.Hero;
+import heroes.Pyromancer;
+import heroes.Knight;
+import heroes.Wizard;
+import heroes.Rogue;
 
-public class Backstab extends RogueAbility {
+public final class Backstab extends RogueAbility {
     private static final float ROGUE_MODIFIER = 1.2f;
     private static final float KNIGHT_MODIFIER = 0.9f;
     private static final float PYROMANCER_MODIFIER = 1.25f;
@@ -13,31 +17,33 @@ public class Backstab extends RogueAbility {
 
     private static final int CRITICAL_HIT_PERIOD = 3;
 
+    // counter for critical hits
     private int countHits;
 
     @Override
-    public void affectHero(Pyromancer pyro) {
+    public void affectHero(final Pyromancer pyro) {
         affectHero(pyro, PYROMANCER_MODIFIER);
     }
 
     @Override
-    public void affectHero(Knight knight) {
+    public void affectHero(final Knight knight) {
         affectHero(knight, KNIGHT_MODIFIER);
     }
 
     @Override
-    public void affectHero(Wizard wizard) {
+    public void affectHero(final Wizard wizard) {
         affectHero(wizard, WIZARD_MODIFIER);
     }
 
     @Override
-    public void affectHero(Rogue rogue) {
+    public void affectHero(final Rogue rogue) {
         affectHero(rogue, ROGUE_MODIFIER);
     }
 
-    private void affectHero(Hero hero, float heroModifier) {
+    private void affectHero(final Hero hero, final float heroModifier) {
         ++countHits;
 
+        // damaging the enemy hero
         float finalDamage = damage * heroModifier;
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
     }
@@ -45,6 +51,8 @@ public class Backstab extends RogueAbility {
     @Override
     public void updateAbility() {
         float criticalHit = 1.0f;
+
+        // checking if the next hit will be a critical one
         if (countHits % CRITICAL_HIT_PERIOD == 0) {
             criticalHit = caster.getTerrain().getTerrainAbilityModifier(this);
         }
