@@ -1,6 +1,4 @@
 Starting audit...
-[ERROR] /home/ursu/workspace/poo_teme/tema2_poo/src/abilities/overtimeEffects/OvertimeEffect.java:8:27: Parameter noRounds should be final. [FinalParameters]
-[ERROR] /home/ursu/workspace/poo_teme/tema2_poo/src/abilities/overtimeEffects/OvertimeEffect.java:17:45: Redundant 'final' modifier. [RedundantModifier]
 [ERROR] /home/ursu/workspace/poo_teme/tema2_poo/src/abilities/overtimeEffects/OvertimeEffect.java:19:5: Class 'OvertimeEffect' looks like designed for extension (can be subclassed), but the method 'getNoRounds' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'OvertimeEffect' final or making the method 'getNoRounds' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 [ERROR] /home/ursu/workspace/poo_teme/tema2_poo/src/abilities/OvertimeAbility.java:6:5: Redundant 'public' modifier. [RedundantModifier]
 [ERROR] /home/ursu/workspace/poo_teme/tema2_poo/src/abilities/Ability.java:18:5: Class 'Ability' looks like designed for extension (can be subclassed), but the method 'setCaster' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'Ability' final or making the method 'setCaster' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
@@ -23,4 +21,4 @@ Starting audit...
 [ERROR] /home/ursu/workspace/poo_teme/tema2_poo/src/heroes/Hero.java:121:5: Class 'Hero' looks like designed for extension (can be subclassed), but the method 'isDead' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'Hero' final or making the method 'isDead' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 [ERROR] /home/ursu/workspace/poo_teme/tema2_poo/src/heroes/Hero.java:125:5: Class 'Hero' looks like designed for extension (can be subclassed), but the method 'setOvertimeEffect' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'Hero' final or making the method 'setOvertimeEffect' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 Audit done.
-Checkstyle ends with 23 errors.
+Checkstyle ends with 21 errors.

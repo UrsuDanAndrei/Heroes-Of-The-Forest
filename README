@@ -1,0 +1,242 @@
+Idea de baza:
+Clasele principale prin care se implementeaza logica problemei sunt cele din
+ierarhiile Heroes si Abilities. Deoarece fiecare abilitatea se comporta diferit
+fata de fiecare erou este necesara tratarea separata a 4 (numarul de eroi) x 8
+(numarul de abilitati) = 32 de cazuri. Pentru a pastra un cod bine modulat si
+clar a fost necesara implementarea unei tehnici de tipul "double dispatch".
+
+Acest lucru s-a realizat prin urmatoarele apeluri:
+1. hero.getAffectedByAbility(Ability ability);
+=> aici s-a realizat primul dispatch, determinandu-se la runtime tipul 
+eroului(Knight, Rogue...) ce urmeaza sa fie afectat de abilitate.
+
+2. ability.affectHero(this);
+=> apelul este efectuat in interiolur metodei "1.", realizandu-se astfel al
+doilea dispatch, deoarece se va apela la runtime instanta unei abilitati
+specifice (Ignite, Backstap...) care primeste ca argument o referinta la un erou
+specific.
+
+Implementarea efectiva a interactiunii erou - abilitate a fost realizata in
+metoda apelata la "2.".
+
+
+
+Un alt "double dispatch" a fost realizat intre ierarhiile Hero si Terrain prin
+apelurile:
+
+1. hero.getTerrainModifier();
+2. Map.getInstance().getTerrain(posMapX, posMapY).getTerrainModifier(this);
+(terenul pe care se afla eroul).getTerrainModifier(this);
+
+Astfel a fost facilitat accesul la modificatorii de teren pentru fiecare erou.
+
+================================================================================
+
+package input:
+
+class GameInputReader:
+Utilizeaza un obiect de tipul FileSystem pentru a realiza citirea din fisierul
+de intrare si incarcarea datelor intr-un obiect de tipul GameInput.
+Constructorul primeste calea catre fisierul de intrare si catre fisierul de
+iesire.
+
+class GameInput:
+Stocheaza datele de intrare si contine metode pentru a oferi acces la acestea.
+Constructorul primeste aceste date de intrare ca parametri.
+
+
+
+package output:
+
+class GameOutput:
+Retine informatiile ce trebuie afisate de catre GameOutputWriter. Constructorul
+primeste aceste informatii ca parametri.
+
+class GameOutputWriter:
+Afiseaza informatiile stocate in GameOutput. Constructorul primeste calea catre
+fisierul de intrare si calea catre fisierul de iesire.
+
+================================================================================
+
+package common:
+
+class Map:
+Contine o implementare in "singleton pattern" a hartii pe care se desfasoara
+jocul. Constructorul priemeste: dimensiuniile hartii si o matrice de caractere
+care sa defineasca fiecare tip de teren.
+
+private List<ArrayList<Terrain>> mapMatrix:
+Retine o matrice care contine in fiecare celula o instanta a unei
+clase din ierarhia Terrain.
+
+
+public Terrain getTerrain(int x, int y):
+Returneaza instanta de tip Terrain ce se gaseste la pozitia (x, y).
+
+public void moveHero(Hero hero, char move):
+Deplaseaza eroului trimis ca parametru in directia specificata de variabila move
+
+
+class Constants:
+Constante publice utile in proiect
+
+================================================================================
+
+package terrain:
+
+Terrain -> Desert
+		-> Land
+		-> Volcanic
+		-> Woods
+
+class Terrain:
+Clasa abstracta, sablon pentru subclasele ce o mostenesc. Fiecare clasa copil 
+contine propriile constante ce imbunatatesc abilitatile unui erou sau efectele
+unei abilitati.
+
+public abstract float getTerrainModifier(TipErou erou):
+Returneaza modificatorul din clasa ce o suprascrie pentru eroul primit ca
+parametru (poate fi Pyromancer, Knight...).
+
+public abstract float getTerrainAbilityModifier(TipAbilitate abilitate):
+Returneaza modificatorul din clasa ce o suprascrie pentru abilitatea primita ca
+parametru (poate fi Paralysis, Backstab).
+
+
+class TerrainFactory:
+"Factory pattern"
+
+public Terrain createTerrain(TerrainType type):
+Returneaza o instanta de tipul type din ierarhia Terrain
+
+================================================================================
+
+package heroes:
+
+Hero -> Pyromancer
+	 -> Knight
+	 -> Wizard 
+	 ->	Rogue
+	 
+class Hero:
+Clasa abstracta, sablon pentru subclasele ce o mostenesc. Constructorul primeste
+pozitia eroului pe harta (x, y) si lista lui de abilitati.
+
+Atribute: int health, int level, int xp, boolean stunned
+
+private OvertimeEffect effect:
+Retine o referinta catre instanta de efect prelungit de care sufera eroul, sau
+catre null daca eroul nu sufera de niciun efect
+
+
+public abstract void getAffectedByAbility(Ability ability):
+Realizeaza "double dispatch" intre Hero si Ability, are rolul de a trimite ca
+parametru referinta la obiectul din clasa ce o suprascrie.
+
+public abstract void getAffectedByOvertimeEffect():
+Daca eroul a fost expus la o abilitate cu efect indelungat si inca sufera de ea
+in runda curenta metoda va apela overtimeEffect.affectHero(this), unde este
+implementata modul in care abilitatea afecteaza eroul (this este
+referinta la instanta ce suprascrie metoda).
+
+public abstract float getTerrainModifier():
+Realizeaza "double dispatch" intre Hero si Terrain, are rolul de a returna
+modificatorul de teren specific instantei care suprascrie metoda.
+
+public abstract void checkLevelUp():
+Implementeaza mecanismul de "level up" al eroilor.
+
+class HeroesFactory:
+"Factory pattern"
+
+public Hero createHero(HeroType type):
+Returneaza o instanta de tipul type din ierarhia Hero
+
+================================================================================
+
+package abilities:
+
+Ability --> PyromancerAbility -> Fireblast
+							  -> Ignite (OvertimeAbility)
+
+		--> KnightAbility 	  -> Execute
+							  -> Slam (OvertimeAbility)
+
+		--> WizardAbility	  -> Drain
+							  -> Deflect
+
+		--> RogueAbility	  -> Backstab
+							  -> Paralysis (OvertimeAbility)
+
+
+class Ability:
+Clasa abstracta, sablon pentru subclasele ce o mostenesc. Clasele de tipul
+HEROAbility (Pyromancer, Knight...), au fost construite pentru o modularizare
+mai buna si pentru o implementare mai rapida a functionalitatilor etapei
+viitoare (poate se adauga un atribut, o metoda specifica pentru abilitatiile
+unei anumite clase). In aceeasi idee a fost adaugata si interfata
+OvertimeAbility, implementata de abilitatiile cu efect prelungit. (In etapa
+actuala a proiectului aceste elemente au mai mult un rol structural decat
+functional si in cazul in care in etapa 2 se vor dovedi inutile, le voi sterge).
+
+protected Hero caster:
+Referinta la eroul care detine abilitatea. Damage-ul abilitatii se modifica in
+functie de level-ul si terenul pe care se affla caster-ul.
+
+
+public abstract void affectHero(TipErou erou):
+Implementeaza interactiunea dintre abilitatea ce suprascrie
+metoda si eroul (Pyromancer, Knight...) asupra caruia se aplica. Pentru
+majoritatea claselor de abilitati, aceasta metoda are rolul de seta
+modificatorul de rasa si de a apela o metoda privata
+affectHero(Hero hero, float heroModifier) in care se scade health-ul eroului.
+
+public void updateAbility():
+Realizeaza update-urile necesare pentru aplicarea abilitatii in runda curenta,
+aceste modificari tin cont numai de caster-ul abilitatii (de level-ul si terenul
+pe care se afla), eroul asupra caruia se aplica abilitatea fiind gestionat de
+metoda anterioara.
+
+================================================================================
+
+package abilities.ovetimeEffects
+
+OvertimeEffect -> Burn
+			   -> Stun
+			   -> Paralyse
+
+
+class OvertimeEffect:
+Clasa abstracta, sablon pentru subclasele ce o mostenesc. Constructorul primeste
+durata (numarul de runde) ale efectului generat de o abilitate.
+
+public abstract void overtimeAffect(Hero hero):
+Implementeaza modul in care efectul prelungit care suprascrie metoda afecteaza
+eroul. Mecanismul de "double dispatch" a fost evitat in cazul acesta, 
+particularitatiile eroilor asupra carora se aplica efectul fiind setate din
+abilitatea care il genereaza. Daca complexitatea efectelor creste si ele devin
+mai variate se poate adauga cu usurinta si mecanismul precizat anterior.
+
+================================================================================ 
+
+package main:
+
+class Main:
+Implementaeza logica problemei. Initial se citesc datele utilizand un obiect
+de tip GameInputReader si se copiaza in variabile locale. Se formeaza un vector 
+de eroi (heroes).
+
+Fiecare runda incepe cu afectarea fiecarui erou de catre overTimeEffect-ul lui
+(daca exista). Apoi cu deplasarea eroului (daca este posibil) pe mapa conform
+vectorului de mutari din runda curenta.
+
+Daca se gasesc 2 eroi vii in acceasi celula a mapei acestia se vor lupta. 
+Batalia este simulata in metoda:
+
+
+private static void fight(Hero hero1, Hero hero2):
+Fiecare erou isi face update la abilitatile proprii si dupa le aplica eroului
+inamic. Daca in urma rundei un erou moare, adversarul lui primeste xp-ul 
+cuvenit.
+
+La finalul rundelor se afiseaza fiecare erou in formatul solicitat de problema.

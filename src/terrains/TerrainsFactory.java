@@ -1,15 +1,15 @@
 package terrains;
 
-public final class TerrainFactory {
-    private static TerrainFactory instance = null;
+public final class TerrainsFactory {
+    private static TerrainsFactory instance = null;
 
-    private TerrainFactory() {
+    private TerrainsFactory() {
 
     }
 
-    public static TerrainFactory getInstance() {
+    public static TerrainsFactory getInstance() {
         if (instance == null) {
-            instance = new TerrainFactory();
+            instance = new TerrainsFactory();
         }
 
         return instance;

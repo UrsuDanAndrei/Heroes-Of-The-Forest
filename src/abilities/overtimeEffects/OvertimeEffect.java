@@ -5,7 +5,7 @@ import heroes.Hero;
 public abstract class OvertimeEffect {
     protected int noRounds;
 
-    public OvertimeEffect(int noRounds) {
+    public OvertimeEffect(final int noRounds) {
         this.noRounds = noRounds;
     }
 
@@ -14,7 +14,7 @@ public abstract class OvertimeEffect {
      there is no need to apply double dispatch between OvertimeEffect and Hero hierarchies (the
      principal is already applied between Ability and Hero)
      */
-    public abstract void overtimeAffectHero(final Hero hero);
+    public abstract void overtimeAffectHero(Hero hero);
 
     public int getNoRounds() {
         return noRounds;

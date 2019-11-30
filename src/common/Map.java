@@ -3,7 +3,7 @@ package common;
 import heroes.Hero;
 
 import terrains.Terrain;
-import terrains.TerrainFactory;
+import terrains.TerrainsFactory;
 import terrains.TerrainTypes;
 
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public final class Map {
     // transforms a char matrix into a terrain matrix
     private void setMapMatrix(final List<String> charMatrix) {
         mapMatrix = new ArrayList<>(dimX);
-        TerrainFactory terrainFactory = TerrainFactory.getInstance();
+        TerrainsFactory terrainFactory = TerrainsFactory.getInstance();
 
         for (int i = 0; i < dimX; i++) {
             ArrayList<Terrain> row = new ArrayList<>(dimY);
