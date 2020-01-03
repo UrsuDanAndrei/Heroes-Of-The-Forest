@@ -6,6 +6,7 @@ import angels.angelVisitors.KnightAngelVisitor;
 import common.Constants;
 import common.Map;
 
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 public final class Knight extends Hero {
@@ -15,6 +16,7 @@ public final class Knight extends Hero {
     public Knight(final int posMapX, final int posMapY, final List<Ability> abilities, final int id) {
         super(posMapX, posMapY, abilities, id);
         health = INITIAL_HEALTH;
+        pcs = new PropertyChangeSupport(this);
     }
 
     @Override
@@ -37,6 +39,9 @@ public final class Knight extends Hero {
                 // restoring the knight to his full health
                 health = INITIAL_HEALTH + BONUS_HEALTH_LEVEL_UP * level;
             }
+
+            // The Great Magician is notified about this leveling up
+            this.sendHeroNotification(HeroActions.LEVEL_UP, null);
         }
     }
 

@@ -2,10 +2,12 @@ package main;
 
 import abilities.Ability;
 
+import angels.Angel;
 import common.Map;
 
 import heroes.Hero;
 
+import heroes.HeroActions;
 import input.GameInput;
 import input.GameInputReader;
 
@@ -30,6 +32,8 @@ public final class Main {
         Map map = gameInput.getMap();
         List<Hero> heroes = gameInput.getHeroes();
         List<String> moves = gameInput.getMoves();
+
+        // addTheGreateMagicianAsObserver();
 
         // simulating the fame flow
         for (int round = 0; round < noRounds; ++round) {
@@ -107,18 +111,22 @@ public final class Main {
 
         // if a hero dies in this fight the other one receives the xp bonus, and may level up
         if (hero1.isDead()) {
+            // The Great Magician should is notified about this death
+            hero2.sendHeroNotification(HeroActions.KILL, hero1);
+
             hero2.bonusXpForKill(hero1);
             hero2.checkLevelUp();
-
-            // The Great Magician should is notified about this death
-            hero2.sendNotification(hero1);
         }
 
         if (hero2.isDead()) {
+            hero1.sendHeroNotification(HeroActions.KILL, hero2);
+
             hero1.bonusXpForKill(hero2);
             hero1.checkLevelUp();
-
-            hero1.sendNotification(hero2);
         }
+    }
+
+    private static void addTheGreateMagicianAsObserver(List<Hero> heroes, List<Angel> angels) {
+
     }
 }
