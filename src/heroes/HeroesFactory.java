@@ -23,7 +23,7 @@ public final class HeroesFactory {
         return instance;
     }
 
-    public Hero createHero(final HeroTypes type, final int posMapX, final int posMapY) {
+    public Hero createHero(final HeroTypes type, final int posMapX, final int posMapY, final int id) {
         List<Ability> abilities = new ArrayList<>();
         AbilitiesFactory abilitiesFactory = AbilitiesFactory.getInstance();
         Hero hero;
@@ -33,7 +33,7 @@ public final class HeroesFactory {
                 // giving the pyromancer hero his specific abilities
                 abilities.add(abilitiesFactory.creatAbility(AbilityTypes.FIREBLAST));
                 abilities.add(abilitiesFactory.creatAbility(AbilityTypes.IGNITE));
-                hero =  new Pyromancer(posMapX, posMapY, abilities);
+                hero =  new Pyromancer(posMapX, posMapY, abilities, id);
 
                 // setting up the caster for abilities
                 for (Ability ability : abilities) {
@@ -45,7 +45,7 @@ public final class HeroesFactory {
                 // giving the knight hero his specific abilities
                 abilities.add(abilitiesFactory.creatAbility(AbilityTypes.EXECUTE));
                 abilities.add(abilitiesFactory.creatAbility(AbilityTypes.SLAM));
-                hero = new Knight(posMapX, posMapY, abilities);
+                hero = new Knight(posMapX, posMapY, abilities, id);
 
                 // setting up the caster for abilities
                 for (Ability ability : abilities) {
@@ -57,7 +57,7 @@ public final class HeroesFactory {
                 // giving the wizard hero his specific abilities
                 abilities.add(abilitiesFactory.creatAbility(AbilityTypes.DRAIN));
                 abilities.add(abilitiesFactory.creatAbility(AbilityTypes.DEFLECT));
-                hero =  new Wizard(posMapX, posMapY, abilities);
+                hero =  new Wizard(posMapX, posMapY, abilities, id);
 
                 // setting up the caster for abilities
                 for (Ability ability : abilities) {
@@ -69,7 +69,7 @@ public final class HeroesFactory {
                 // giving the rogue hero his specific abilities
                 abilities.add(abilitiesFactory.creatAbility(AbilityTypes.BACKSTAB));
                 abilities.add(abilitiesFactory.creatAbility(AbilityTypes.PARALYSIS));
-                hero = new Rogue(posMapX, posMapY, abilities);
+                hero = new Rogue(posMapX, posMapY, abilities, id);
 
                 // setting up the caster for abilities
                 for (Ability ability : abilities) {

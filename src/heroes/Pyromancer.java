@@ -10,8 +10,8 @@ public final class Pyromancer extends Hero {
     private static final int INITIAL_HEALTH = 500;
     private static final int BONUS_HEALTH_LEVEL_UP = 50;
 
-    public Pyromancer(final int posMapX, final int posMapY, final List<Ability> abilities) {
-        super(posMapX, posMapY, abilities);
+    public Pyromancer(final int posMapX, final int posMapY, final List<Ability> abilities, final int id) {
+        super(posMapX, posMapY, abilities, id);
         health = INITIAL_HEALTH;
     }
 
@@ -55,6 +55,6 @@ public final class Pyromancer extends Hero {
 
     @Override
     public String toString() {
-        return "P " + super.toString();
+        return "Pyromancer " + id;
     }
 }

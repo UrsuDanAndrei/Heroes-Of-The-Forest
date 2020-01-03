@@ -1,4 +1,4 @@
-Idea de baza:
+Ideea de baza:
 Clasele principale prin care se implementeaza logica problemei sunt cele din
 ierarhiile Heroes si Abilities. Deoarece fiecare abilitatea se comporta diferit
 fata de fiecare erou este necesara tratarea separata a 4 (numarul de eroi) x 8

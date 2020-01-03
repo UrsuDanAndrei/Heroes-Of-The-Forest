@@ -59,16 +59,16 @@ public final class GameInputReader {
 
                 switch (heroChar) {
                     case 'P':
-                        hero = heroesFactory.createHero(HeroTypes.PYROMANCER, posHeroX, posHeroY);
+                        hero = heroesFactory.createHero(HeroTypes.PYROMANCER, posHeroX, posHeroY, i);
                         break;
                     case 'K':
-                        hero = heroesFactory.createHero(HeroTypes.KNIGHT, posHeroX, posHeroY);
+                        hero = heroesFactory.createHero(HeroTypes.KNIGHT, posHeroX, posHeroY, i);
                         break;
                     case 'W':
-                        hero = heroesFactory.createHero(HeroTypes.WIZARD, posHeroX, posHeroY);
+                        hero = heroesFactory.createHero(HeroTypes.WIZARD, posHeroX, posHeroY, i);
                         break;
                     case 'R':
-                        hero = heroesFactory.createHero(HeroTypes.ROGUE, posHeroX, posHeroY);
+                        hero = heroesFactory.createHero(HeroTypes.ROGUE, posHeroX, posHeroY, i);
                         break;
                     default:
                         hero = null;

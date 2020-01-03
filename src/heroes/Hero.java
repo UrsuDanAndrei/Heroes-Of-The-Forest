@@ -8,6 +8,7 @@ import common.Map;
 import terrains.Terrain;
 
 public abstract class Hero {
+    protected int id;
     protected int health;
     protected int level;
     protected int xp;
@@ -23,7 +24,8 @@ public abstract class Hero {
 
     }
 
-    public Hero(final int posMapX, final int posMapY, final List<Ability> abilities) {
+    public Hero(final int posMapX, final int posMapY, final List<Ability> abilities, final int id) {
+        this.id = id;
         this.posMapX = posMapX;
         this.posMapY = posMapY;
         this.abilities = abilities;
@@ -50,27 +52,6 @@ public abstract class Hero {
     // returns the terrain instance that is at hero's position on the map
     public Terrain getTerrain() {
         return Map.getInstance().getTerrain(posMapX, posMapY);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        if (isDead()) {
-            sb.append("dead");
-        } else {
-            sb.append(level);
-            sb.append(" ");
-            sb.append(xp);
-            sb.append(" ");
-            sb.append(health);
-            sb.append(" ");
-            sb.append(posMapX);
-            sb.append(" ");
-            sb.append(posMapY);
-        }
-
-        return sb.toString();
     }
 
     // getters and setters

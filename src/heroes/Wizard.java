@@ -10,8 +10,8 @@ public final class Wizard extends Hero {
     private static final int INITIAL_HEALTH = 400;
     private static final int BONUS_HEALTH_LEVEL_UP = 30;
 
-    public Wizard(final int posMapX, final int posMapY, final List<Ability> abilities) {
-        super(posMapX, posMapY, abilities);
+    public Wizard(final int posMapX, final int posMapY, final List<Ability> abilities, final int id) {
+        super(posMapX, posMapY, abilities, id);
         health = INITIAL_HEALTH;
     }
 
@@ -54,6 +54,6 @@ public final class Wizard extends Hero {
 
     @Override
     public String toString() {
-        return "W " + super.toString();
+        return "Wizard " + id;
     }
 }

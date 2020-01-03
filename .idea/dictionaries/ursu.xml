@@ -2,9 +2,11 @@
   <dictionary name="ursu">
     <words>
       <w>backstab</w>
+      <w>doomer</w>
       <w>fireblast</w>
       <w>pyro</w>
       <w>pyromancer</w>
+      <w>spawner</w>
     </words>
   </dictionary>
 </component>

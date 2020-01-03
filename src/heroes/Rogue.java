@@ -10,8 +10,8 @@ public final class Rogue extends Hero {
     private static final int INITIAL_HEALTH = 600;
     private static final int BONUS_HEALTH_LEVEL_UP = 40;
 
-    public Rogue(final int posMapX, final int posMapY, final List<Ability> abilities) {
-        super(posMapX, posMapY, abilities);
+    public Rogue(final int posMapX, final int posMapY, final List<Ability> abilities, final int id) {
+        super(posMapX, posMapY, abilities, id);
         health = INITIAL_HEALTH;
     }
 
@@ -55,6 +55,6 @@ public final class Rogue extends Hero {
 
     @Override
     public String toString() {
-        return "R " + super.toString();
+        return "Rogue " + id;
     }
 }
