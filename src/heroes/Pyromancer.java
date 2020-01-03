@@ -1,6 +1,10 @@
 package heroes;
 
 import abilities.Ability;
+import angels.Angel;
+import angels.angelVisitors.AngelVisitable;
+import angels.angelVisitors.KnightAngelVisitor;
+import angels.angelVisitors.PyromancerAngelVisitor;
 import common.Constants;
 import common.Map;
 
@@ -51,6 +55,12 @@ public final class Pyromancer extends Hero {
                 overtimeEffect = null;
             }
         }
+    }
+
+    @Override
+    public void getAffectedByAngel(Angel angel) {
+        PyromancerAngelVisitor pav = PyromancerAngelVisitor.getInstance();
+        angel.accept(pav, this);
     }
 
     @Override

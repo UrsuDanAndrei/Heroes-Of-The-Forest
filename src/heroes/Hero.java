@@ -3,6 +3,7 @@ package heroes;
 import java.util.List;
 import abilities.Ability;
 import abilities.overtimeEffects.OvertimeEffect;
+import angels.Angel;
 import common.Constants;
 import common.Map;
 import terrains.Terrain;
@@ -53,6 +54,9 @@ public abstract class Hero {
     public Terrain getTerrain() {
         return Map.getInstance().getTerrain(posMapX, posMapY);
     }
+
+    // simulates angel's effect over the hero
+    public abstract void getAffectedByAngel(Angel angel);
 
     // getters and setters
     public int getHealth() {

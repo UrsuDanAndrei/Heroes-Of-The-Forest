@@ -1,11 +1,12 @@
 package angels;
 
+import angels.angelVisitors.AngelVisitable;
 import heroes.Hero;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public abstract class Angel {
+public abstract class Angel implements AngelVisitable {
     protected int posMapX;
     protected int posMapY;
 

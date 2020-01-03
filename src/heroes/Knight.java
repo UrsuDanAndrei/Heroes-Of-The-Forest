@@ -53,6 +53,8 @@ public final class Knight extends Hero {
         }
     }
 
+
+
     @Override
     public String toString() {
         return "Knight " + id;
