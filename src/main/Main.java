@@ -109,11 +109,16 @@ public final class Main {
         if (hero1.isDead()) {
             hero2.bonusXpForKill(hero1);
             hero2.checkLevelUp();
+
+            // The Great Magician should is notified about this death
+            hero2.sendNotification(hero1);
         }
 
         if (hero2.isDead()) {
             hero1.bonusXpForKill(hero2);
             hero1.checkLevelUp();
+
+            hero1.sendNotification(hero2);
         }
     }
 }

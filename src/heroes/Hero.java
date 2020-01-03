@@ -1,5 +1,7 @@
 package heroes;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 import abilities.Ability;
 import abilities.overtimeEffects.OvertimeEffect;
@@ -13,6 +15,10 @@ public abstract class Hero {
     protected int health;
     protected int level;
     protected int xp;
+
+    protected String notification;
+    protected PropertyChangeSupport pcs;
+
     protected boolean stunned;
 
     protected int posMapX;
@@ -32,6 +38,25 @@ public abstract class Hero {
         this.abilities = abilities;
     }
 
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        pcs.addPropertyChangeListener(pcl);
+    }
+
+    public void sendHeroNotification(HeroActions action, Hero hero) {
+        switch (action) {
+            case KILL:
+                notification = "Player " + hero.toString() + " was killed by " + notification;
+                break;
+            case LEVEL_UP:
+                notification = notification + " reached level " + level;
+                break;
+            default:
+                notification = null;
+        }
+
+        pcs.firePropertyChange("notification", "", this.notification);
+    }
+
     public abstract void getAffectedByAbility(Ability ability);
 
     // if the hero suffers from an overtime effect he will get affected by it
@@ -46,6 +71,10 @@ public abstract class Hero {
 
     // increase hero's experience according to the enemy he has killed
     public void bonusXpForKill(final Hero hero) {
+        if (hero.isDead()) {
+            return;
+        }
+
         xp += Math.max(0,
                 Constants.BONUS_XP - (level - hero.getLevel()) * Constants.LEVEL_FACTOR_BONUS_XP);
     }

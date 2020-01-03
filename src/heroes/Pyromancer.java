@@ -20,6 +20,12 @@ public final class Pyromancer extends Hero {
     }
 
     @Override
+    public void sendHeroNotification(HeroActions action, Hero hero) {
+        notification = this.toString();
+        super.sendHeroNotification(action, hero);
+    }
+
+    @Override
     public int getMaxHealth() {
         return INITIAL_HEALTH + BONUS_HEALTH_LEVEL_UP * level;
     }
