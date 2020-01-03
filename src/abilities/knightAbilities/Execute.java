@@ -7,10 +7,10 @@ import heroes.Wizard;
 import heroes.Rogue;
 
 public final class Execute extends KnightAbility {
-    private static final float ROGUE_MODIFIER = 1.15f;
-    private static final float KNIGHT_MODIFIER = 1.0f;
-    private static final float PYROMANCER_MODIFIER = 1.1f;
-    private static final float WIZARD_MODIFIER = 0.8f;
+    private static final float INITIAL_ROGUE_MODIFIER = 1.15f;
+    private static final float INITIAL_KNIGHT_MODIFIER = 1.0f;
+    private static final float INITIAL_PYROMANCER_MODIFIER = 1.1f;
+    private static final float INITIAL_WIZARD_MODIFIER = 0.8f;
 
     private static final int INITIAL_DAMAGE = 200;
     private static final int BONUS_DAMAGE_LEVEL_UP = 30;
@@ -21,24 +21,31 @@ public final class Execute extends KnightAbility {
 
     private float healthLimitPercent;
 
+    public Execute() {
+        rogueModifier = INITIAL_ROGUE_MODIFIER;
+        knightModifier = INITIAL_KNIGHT_MODIFIER;
+        pyromancerModifier = INITIAL_PYROMANCER_MODIFIER;
+        wizardModifier = INITIAL_WIZARD_MODIFIER;
+    }
+
     @Override
     public void affectHero(final Pyromancer pyro) {
-        affectHero(pyro, PYROMANCER_MODIFIER);
+        affectHero(pyro, pyromancerModifier);
     }
 
     @Override
     public void affectHero(final Knight knight) {
-        affectHero(knight, KNIGHT_MODIFIER);
+        affectHero(knight, INITIAL_KNIGHT_MODIFIER);
     }
 
     @Override
     public void affectHero(final Wizard wizard) {
-        affectHero(wizard, WIZARD_MODIFIER);
+        affectHero(wizard, wizardModifier);
     }
 
     @Override
     public void affectHero(final Rogue rogue) {
-        affectHero(rogue, ROGUE_MODIFIER);
+        affectHero(rogue, rogueModifier);
     }
 
     private void affectHero(final Hero hero, final float heroModifier) {
@@ -57,5 +64,7 @@ public final class Execute extends KnightAbility {
                 + BONUS_HEALTH_LIMIT_PERCENT_LEVEL_UP * caster.getLevel());
         damage = (INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * caster.getLevel())
                 * caster.getTerrainModifier();
+
+        damage = Math.round(damage);
     }
 }

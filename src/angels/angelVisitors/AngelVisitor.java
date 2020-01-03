@@ -3,7 +3,7 @@ package angels.angelVisitors;
 import angels.*;
 
 public interface AngelVisitor {
-    public void visit(DamageAngel damageAngel);
+    public void visit(DamageAngel damageAngel, );
     public void visit(DarkAngel darkAngel);
     public void visit(Dracula dracula);
     public void visit(GoodBoy goodBoy);

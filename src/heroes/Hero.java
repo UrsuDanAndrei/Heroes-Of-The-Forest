@@ -106,4 +106,12 @@ public abstract class Hero {
     public void setOvertimeEffect(final OvertimeEffect overtimeEffect) {
         this.overtimeEffect = overtimeEffect;
     }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
 }

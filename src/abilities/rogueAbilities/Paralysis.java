@@ -11,10 +11,10 @@ import heroes.Wizard;
 import heroes.Rogue;
 
 public final class Paralysis extends RogueAbility implements OvertimeAbility {
-    private static final float ROGUE_MODIFIER = 0.9f;
-    private static final float KNIGHT_MODIFIER = 0.8f;
-    private static final float PYROMANCER_MODIFIER = 1.2f;
-    private static final float WIZARD_MODIFIER = 1.25f;
+    private static final float INITIAL_ROGUE_MODIFIER = 0.9f;
+    private static final float INITIAL_KNIGHT_MODIFIER = 0.8f;
+    private static final float INITIAL_PYROMANCER_MODIFIER = 1.2f;
+    private static final float INITIAL_WIZARD_MODIFIER = 1.25f;
 
     private static final int INITIAL_DAMAGE = 40;
     private static final int BONUS_DAMAGE_LEVEL_UP = 10;
@@ -23,6 +23,13 @@ public final class Paralysis extends RogueAbility implements OvertimeAbility {
     private Paralyse paralyse;
     private int noRoundsParalyse;
 
+    public Paralysis() {
+        rogueModifier = INITIAL_ROGUE_MODIFIER;
+        knightModifier = INITIAL_KNIGHT_MODIFIER;
+        pyromancerModifier = INITIAL_PYROMANCER_MODIFIER;
+        wizardModifier = INITIAL_WIZARD_MODIFIER;
+    }
+
     @Override
     public OvertimeEffect getOvertimeEffect() {
         return paralyse;
@@ -30,22 +37,22 @@ public final class Paralysis extends RogueAbility implements OvertimeAbility {
 
     @Override
     public void affectHero(final Pyromancer pyro) {
-        affectHero(pyro, PYROMANCER_MODIFIER);
+        affectHero(pyro, pyromancerModifier);
     }
 
     @Override
     public void affectHero(final Knight knight) {
-        affectHero(knight, KNIGHT_MODIFIER);
+        affectHero(knight, knightModifier);
     }
 
     @Override
     public void affectHero(final Wizard wizard) {
-        affectHero(wizard, WIZARD_MODIFIER);
+        affectHero(wizard, wizardModifier);
     }
 
     @Override
     public void affectHero(final Rogue rogue) {
-        affectHero(rogue, ROGUE_MODIFIER);
+        affectHero(rogue, rogueModifier);
     }
 
     private void affectHero(final Hero hero, final float heroModifier) {
@@ -62,5 +69,7 @@ public final class Paralysis extends RogueAbility implements OvertimeAbility {
         noRoundsParalyse = caster.getTerrain().getTerrainAbilityModifier(this);
         damage = (INITIAL_DAMAGE + BONUS_DAMAGE_LEVEL_UP * caster.getLevel())
                 * caster.getTerrainModifier();
+
+        damage = Math.round(damage);
     }
 }

@@ -56,4 +56,9 @@ public final class Wizard extends Hero {
     public String toString() {
         return "Wizard " + id;
     }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = Math.min(health, (INITIAL_HEALTH + level * BONUS_HEALTH_LEVEL_UP));
+    }
 }

@@ -11,9 +11,9 @@ import heroes.Rogue;
 import java.util.List;
 
 public final class Deflect extends WizardAbility {
-    private static final float ROGUE_MODIFIER = 1.2f;
-    private static final float KNIGHT_MODIFIER = 1.4f;
-    private static final float PYROMANCER_MODIFIER = 1.3f;
+    private static final float INITIAL_ROGUE_MODIFIER = 1.2f;
+    private static final float INITIAL_KNIGHT_MODIFIER = 1.4f;
+    private static final float INITIAL_PYROMANCER_MODIFIER = 1.3f;
 
     private static final float INITIAL_DEFLECT_PERCENT = 0.35f;
     private static final float BONUS_DEFLECT_PERCENT_LEVEL_UP = 0.02f;
@@ -21,14 +21,20 @@ public final class Deflect extends WizardAbility {
 
     private float deflectPercent;
 
+    public Deflect() {
+        rogueModifier = INITIAL_ROGUE_MODIFIER;
+        knightModifier = INITIAL_KNIGHT_MODIFIER;
+        pyromancerModifier = INITIAL_PYROMANCER_MODIFIER;
+    }
+
     @Override
     public void affectHero(final Pyromancer pyro) {
-        affectHero(pyro, PYROMANCER_MODIFIER);
+        affectHero(pyro, pyromancerModifier);
     }
 
     @Override
     public void affectHero(final Knight knight) {
-        affectHero(knight, KNIGHT_MODIFIER);
+        affectHero(knight, knightModifier);
     }
 
     @Override
@@ -38,7 +44,7 @@ public final class Deflect extends WizardAbility {
 
     @Override
     public void affectHero(final Rogue rogue) {
-        affectHero(rogue, ROGUE_MODIFIER);
+        affectHero(rogue, rogueModifier);
     }
 
     private void affectHero(final Hero hero, final float heroModifier) {

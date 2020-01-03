@@ -22,8 +22,22 @@ public abstract class Angel {
     }
 
     public void sendAngelNotification(AngelActions action, Hero hero) {
-        switch ()
-        pcs.firePropertyChange("notification", this.notification, notification);
+        switch (action) {
+            case HIT:
+                notification += " hit " + hero.toString();
+                break;
+            case HELP:
+                notification += " helped " + hero.toString();
+                break;
+            case SPAWN:
+                notification = "Angel " + notification + " was spawned at "
+                        + posMapX + " " + posMapY;
+                break;
+            default:
+                notification = null;
+        }
+
+        pcs.firePropertyChange("notification", "", notification);
     }
 
     public int getPosMapX() {
