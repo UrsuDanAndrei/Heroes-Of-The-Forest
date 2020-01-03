@@ -1,6 +1,8 @@
 package heroes;
 
 import abilities.Ability;
+import angels.Angel;
+import angels.angelVisitors.KnightAngelVisitor;
 import common.Constants;
 import common.Map;
 
@@ -53,7 +55,11 @@ public final class Knight extends Hero {
         }
     }
 
-
+    @Override
+    public void getAffectedByAngel(Angel angel) {
+        KnightAngelVisitor kav = KnightAngelVisitor.getInstance();
+        angel.accept(kav, this);
+    }
 
     @Override
     public String toString() {

@@ -1,6 +1,8 @@
 package heroes;
 
 import abilities.Ability;
+import angels.Angel;
+import angels.angelVisitors.WizardAngelVisitor;
 import common.Constants;
 import common.Map;
 
@@ -50,6 +52,12 @@ public final class Wizard extends Hero {
                 overtimeEffect = null;
             }
         }
+    }
+
+    @Override
+    public void getAffectedByAngel(Angel angel) {
+        WizardAngelVisitor wav = WizardAngelVisitor.getInstance();
+        angel.accept(wav, this);
     }
 
     @Override

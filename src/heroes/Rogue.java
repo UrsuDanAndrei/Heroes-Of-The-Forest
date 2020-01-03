@@ -1,6 +1,8 @@
 package heroes;
 
 import abilities.Ability;
+import angels.Angel;
+import angels.angelVisitors.RogueAngelVisitor;
 import common.Constants;
 import common.Map;
 
@@ -51,6 +53,12 @@ public final class Rogue extends Hero {
                 overtimeEffect = null;
             }
         }
+    }
+
+    @Override
+    public void getAffectedByAngel(Angel angel) {
+        RogueAngelVisitor rav = RogueAngelVisitor.getInstance();
+        angel.accept(rav, this);
     }
 
     @Override
