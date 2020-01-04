@@ -5,6 +5,7 @@ import abilities.Ability;
 import angels.Angel;
 import common.Map;
 
+import common.TheGreatMagician;
 import heroes.Hero;
 
 import heroes.HeroActions;
@@ -14,6 +15,7 @@ import input.GameInputReader;
 import output.GameOutput;
 import output.GameOutputWriter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Main {
@@ -32,11 +34,13 @@ public final class Main {
         Map map = gameInput.getMap();
         List<Hero> heroes = gameInput.getHeroes();
         List<String> moves = gameInput.getMoves();
+        List<ArrayList<Angel>> allAngels = gameInput.getAllAngels();
 
-        // addTheGreateMagicianAsObserver();
+        addTheGreatMagicianAsObserver(heroes, allAngels);
 
         // simulating the fame flow
         for (int round = 0; round < noRounds; ++round) {
+            System.out.println("~~ Round " + round + " ~~");
             // each hero moves (if he can) as dictated by the array moves
             for (int heroIndex = 0; heroIndex < noHeroes; ++heroIndex) {
                 Hero hero = heroes.get(heroIndex);
@@ -56,7 +60,7 @@ public final class Main {
             }
 
             // checking for fights
-            for (int i = 0; i < noHeroes; ++i) {
+          /*  for (int i = 0; i < noHeroes; ++i) {
                 for (int j = i + 1; j < noHeroes; ++j) {
                     Hero hero1 = heroes.get(i);
                     Hero hero2 = heroes.get(j);
@@ -65,9 +69,23 @@ public final class Main {
                         fight(hero1, hero2);
                     }
                 }
+            }*/
+
+            // simulates angel-hero interaction
+            ArrayList<Angel> angels = allAngels.get(round);
+            for (Angel angel : angels) {
+                System.out.println(angel.toString());
+                /*for (Hero hero : heroes) {
+                    if (samePosition(hero, angel)) {
+                        hero.getAffectedByAngel(angel);
+                    }
+                }*/
             }
+
+            System.out.println();
         }
 
+        System.out.println("~~ Results ~~");
         // creating the output that will be written in the output file
         GameOutput gameOutput = new GameOutput(heroes);
         GameOutputWriter gameOutputWriter = new GameOutputWriter(args[0], args[1]);
@@ -75,6 +93,10 @@ public final class Main {
         // writing the gameOutput in the file given as argument, closing it after
         gameOutputWriter.write(gameOutput);
         gameOutputWriter.close();
+    }
+
+    private static boolean samePosition(final Hero hero, final Angel angel) {
+        return hero.getPosMapX() == angel.getPosMapX() && hero.getPosMapY() == angel.getPosMapY();
     }
 
     private static boolean samePosition(final Hero hero1, final Hero hero2) {
@@ -126,7 +148,18 @@ public final class Main {
         }
     }
 
-    private static void addTheGreateMagicianAsObserver(List<Hero> heroes, List<Angel> angels) {
+    private static void addTheGreatMagicianAsObserver(List<Hero> heroes,
+                                                      List<ArrayList<Angel>> allAngels) {
+        TheGreatMagician tgm = TheGreatMagician.getInstance();
 
+        for (Hero hero : heroes) {
+            hero.addPropertyChangeListener(tgm);
+        }
+
+        for (ArrayList<Angel> angels : allAngels) {
+            for (Angel angel : angels) {
+                angel.addPropertyChangeListener(tgm);
+            }
+        }
     }
 }

@@ -1,5 +1,8 @@
 package input;
 
+import angels.Angel;
+import angels.AngelTypes;
+import angels.AngelsFactory;
 import fileio.FileSystem;
 
 import common.Map;
@@ -26,6 +29,7 @@ public final class GameInputReader {
 
         List<Hero> heroes = null;
         List<String> moves = null;
+        List<ArrayList<Angel>> allAngels = null;
 
         Map map = null;
 
@@ -86,11 +90,35 @@ public final class GameInputReader {
                 moves.add(fs.nextWord());
             }
 
+            /* element with index i in allAngels represents a list of angels that will be spawned
+            in the round i + 1 */
+            allAngels = new ArrayList<>(noRounds);
+
+            for (int i = 0; i < noRounds; ++i) {
+                // reading and creating angels for the current round
+                int noRoundAngels = fs.nextInt();
+                ArrayList<Angel> angels = new ArrayList<>(noRoundAngels);
+
+                for (int j = 0; j < noRoundAngels; ++j) {
+                    // the data is given as a string
+                    String angelDataString = fs.nextWord();
+                    String[] angelData = angelDataString.split(",");
+
+                    // creates an angel using factory pattern and adds it to the list
+                    angels.add(AngelsFactory.getInstance().createAngel(
+                            AngelTypes.valueOf(angelData[0]),
+                            Integer.valueOf(angelData[1]), Integer.valueOf(angelData[2])));
+                }
+
+                // adds the current list to the all angels list
+                allAngels.add(angels);
+            }
+
             fs.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return new GameInput(noHeroes, noRounds, heroes, moves, map);
+        return new GameInput(noHeroes, noRounds, heroes, allAngels, moves, map);
     }
 }

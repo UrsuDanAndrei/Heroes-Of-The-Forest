@@ -6,7 +6,7 @@ public class AngelsFactory {
 
     }
 
-    public AngelsFactory getInstance() {
+    public static AngelsFactory getInstance() {
         if (instance == null) {
             instance = new AngelsFactory();
         }
