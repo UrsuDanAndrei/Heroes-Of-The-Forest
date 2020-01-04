@@ -103,14 +103,14 @@ public class WizardAngelVisitor implements AngelVisitor {
             return;
         }
 
-        levelUpAngel.sendAngelNotification(AngelActions.HELP, hero);
-
         updateAllModifiers(LEVEL_UP_ANGEL_MODIFIER, hero);
 
         // adds xp to the hero and checks if he can level up
         hero.setXp(Constants.LEVEL1_XP_THRESHOLD
                 + hero.getLevel() * Constants.ADDITIONAL_XP_TO_LEVEL_UP);
         hero.checkLevelUp();
+
+        levelUpAngel.sendAngelNotification(AngelActions.HELP, hero);
     }
 
     @Override

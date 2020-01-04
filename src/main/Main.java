@@ -41,7 +41,7 @@ public final class Main {
 
         // simulating the fame flow
         for (int round = 0; round < noRounds; ++round) {
-            System.out.println("~~ Round " + round + " ~~");
+            System.out.println("~~ Round " + (round + 1) + " ~~");
 
             // each hero moves (if he can) as dictated by the array moves
             for (int heroIndex = 0; heroIndex < noHeroes; ++heroIndex) {
@@ -80,10 +80,12 @@ public final class Main {
             // simulates angel-hero interaction
             ArrayList<Angel> angels = allAngels.get(round);
             for (Angel angel : angels) {
-                System.out.println(angel.toString() + " " + angel.getPosMapX() + " " + angel.getPosMapY());
+               // System.out.println(angel.toString() + " " + angel.getPosMapX() + " " + angel.getPosMapY());
                 angel.sendAngelNotification(AngelActions.SPAWN, null);
+
                 for (Hero hero : heroes) {
                     if (samePosition(hero, angel)) {
+                      //  System.out.println("SSSSSSSSSSSSSSSSSSs");
                         hero.getAffectedByAngel(angel);
                     }
                 }
