@@ -3,6 +3,7 @@ package main;
 import abilities.Ability;
 
 import angels.Angel;
+import angels.AngelActions;
 import common.Map;
 
 import common.TheGreatMagician;
@@ -41,6 +42,7 @@ public final class Main {
         // simulating the fame flow
         for (int round = 0; round < noRounds; ++round) {
             System.out.println("~~ Round " + round + " ~~");
+
             // each hero moves (if he can) as dictated by the array moves
             for (int heroIndex = 0; heroIndex < noHeroes; ++heroIndex) {
                 Hero hero = heroes.get(heroIndex);
@@ -52,15 +54,19 @@ public final class Main {
                     continue;
                 }
 
+                // if the hero is not dead and is not stunned he chooses a strategy
                 if (hero.isStunned()) {
                     hero.setStunned(false);
                 } else {
                     map.moveHero(hero, moves.get(round).charAt(heroIndex));
+
+                    hero.chooseStrategy();
+                    hero.applyStrategy();
                 }
             }
 
             // checking for fights
-          /*  for (int i = 0; i < noHeroes; ++i) {
+            for (int i = 0; i < noHeroes; ++i) {
                 for (int j = i + 1; j < noHeroes; ++j) {
                     Hero hero1 = heroes.get(i);
                     Hero hero2 = heroes.get(j);
@@ -69,17 +75,18 @@ public final class Main {
                         fight(hero1, hero2);
                     }
                 }
-            }*/
+            }
 
             // simulates angel-hero interaction
             ArrayList<Angel> angels = allAngels.get(round);
             for (Angel angel : angels) {
-                System.out.println(angel.toString());
-                /*for (Hero hero : heroes) {
+                System.out.println(angel.toString() + " " + angel.getPosMapX() + " " + angel.getPosMapY());
+                angel.sendAngelNotification(AngelActions.SPAWN, null);
+                for (Hero hero : heroes) {
                     if (samePosition(hero, angel)) {
                         hero.getAffectedByAngel(angel);
                     }
-                }*/
+                }
             }
 
             System.out.println();

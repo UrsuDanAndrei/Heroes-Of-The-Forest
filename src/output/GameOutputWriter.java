@@ -26,6 +26,7 @@ public final class GameOutputWriter {
         List<Hero> heroes = gameOutput.getHeroes();
         for (Hero hero : heroes) {
             try {
+                System.out.println(hero.toString());
                 fs.writeWord(hero.toString());
                 fs.writeNewLine();
             } catch (Exception e) {

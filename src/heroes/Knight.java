@@ -5,6 +5,8 @@ import angels.Angel;
 import angels.angelVisitors.KnightAngelVisitor;
 import common.Constants;
 import common.Map;
+import strategies.PyromancerAttackStrategy;
+import strategies.PyromancerDefenceStrategy;
 
 import java.beans.PropertyChangeSupport;
 import java.util.List;
@@ -13,10 +15,28 @@ public final class Knight extends Hero {
     private static final int INITIAL_HEALTH = 900;
     private static final int BONUS_HEALTH_LEVEL_UP = 80;
 
+    private static final int HEALTH_FACTOR_DOWN_STRATEGY = 3;
+    private static final int HEALTH_FACTOR_UP_STRATEGY = 2;
+
     public Knight(final int posMapX, final int posMapY, final List<Ability> abilities, final int id) {
         super(posMapX, posMapY, abilities, id);
         health = INITIAL_HEALTH;
         pcs = new PropertyChangeSupport(this);
+    }
+
+    @Override
+    public void chooseStrategy() {
+        strategy = null;
+        int maxHealthLevel = (INITIAL_HEALTH + level * BONUS_HEALTH_LEVEL_UP);
+
+        if (maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY < health
+                && health < maxHealthLevel / HEALTH_FACTOR_UP_STRATEGY) {
+            strategy = new PyromancerAttackStrategy();
+        }
+
+        if (health < maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY) {
+            strategy = new PyromancerDefenceStrategy();
+        }
     }
 
     @Override

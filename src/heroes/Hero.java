@@ -8,6 +8,7 @@ import abilities.overtimeEffects.OvertimeEffect;
 import angels.Angel;
 import common.Constants;
 import common.Map;
+import strategies.Strategy;
 import terrains.Terrain;
 
 public abstract class Hero {
@@ -15,6 +16,7 @@ public abstract class Hero {
     protected int health;
     protected int level;
     protected int xp;
+    protected Strategy strategy;
 
     protected String notification;
     protected PropertyChangeSupport pcs;
@@ -62,6 +64,14 @@ public abstract class Hero {
 
         pcs.firePropertyChange("notification", "", this.notification);
     }
+
+    public void applyStrategy() {
+        if (strategy != null) {
+            strategy.applyStrategy(this);
+        }
+    }
+
+    public abstract void chooseStrategy();
 
     public abstract void getAffectedByAbility(Ability ability);
 
