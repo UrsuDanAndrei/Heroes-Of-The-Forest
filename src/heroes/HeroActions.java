@@ -2,5 +2,7 @@ package heroes;
 
 public enum HeroActions {
     KILL,
-    LEVEL_UP
+    KILLED_BY_ANGEL,
+    LEVEL_UP,
+    RESURRECTED_BY_ANGEL
 }

@@ -50,6 +50,12 @@ public abstract class Hero {
             case LEVEL_UP:
                 notification = notification + " reached level " + level;
                 break;
+            case KILLED_BY_ANGEL:
+                notification = "Player " + notification + " was killed by an angel";
+                break;
+            case RESURRECTED_BY_ANGEL:
+                notification = "Player " + notification + " was brought to life by an angel";
+                break;
             default:
                 notification = null;
         }
