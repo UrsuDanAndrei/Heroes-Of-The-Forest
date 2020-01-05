@@ -7,6 +7,8 @@ import common.Constants;
 import common.Map;
 import strategies.PyromancerAttackStrategy;
 import strategies.PyromancerDefenceStrategy;
+import strategies.RogueAttackStrategy;
+import strategies.RogueDefenceStrategy;
 
 import java.beans.PropertyChangeSupport;
 import java.util.List;
@@ -31,11 +33,11 @@ public final class Rogue extends Hero {
 
         if (maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY < health
                 && health < maxHealthLevel / HEALTH_FACTOR_UP_STRATEGY) {
-            strategy = new PyromancerAttackStrategy();
+            strategy = new RogueAttackStrategy();
         }
 
         if (health < maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY) {
-            strategy = new PyromancerDefenceStrategy();
+            strategy = new RogueDefenceStrategy();
         }
     }
 

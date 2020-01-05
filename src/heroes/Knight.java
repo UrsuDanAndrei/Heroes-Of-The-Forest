@@ -5,6 +5,8 @@ import angels.Angel;
 import angels.angelVisitors.KnightAngelVisitor;
 import common.Constants;
 import common.Map;
+import strategies.KnightAttackStrategy;
+import strategies.KnightDefenceStrategy;
 import strategies.PyromancerAttackStrategy;
 import strategies.PyromancerDefenceStrategy;
 
@@ -31,11 +33,11 @@ public final class Knight extends Hero {
 
         if (maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY < health
                 && health < maxHealthLevel / HEALTH_FACTOR_UP_STRATEGY) {
-            strategy = new PyromancerAttackStrategy();
+            strategy = new KnightAttackStrategy();
         }
 
         if (health < maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY) {
-            strategy = new PyromancerDefenceStrategy();
+            strategy = new KnightDefenceStrategy();
         }
     }
 
