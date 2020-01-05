@@ -240,3 +240,90 @@ inamic. Daca in urma rundei un erou moare, adversarul lui primeste xp-ul
 cuvenit.
 
 La finalul rundelor se afiseaza fiecare erou in formatul solicitat de problema.
+
+================================================================================
+================================ ETAPA 2 =======================================
+================================================================================
+
+Ideea de baza:
+
+Etapa aceasta au fost adaugate clasele din ierarhia Angel. Interactiunea
+efectiva a acestora cu eroii a fost implementata in schimb prin intermediul
+pattern-ul Visitor, aceasta fiind vizibila in pachetul angelVisitor.
+
+Strategiile de joc ale player-ilor reprezinta tot un element nou in aceasta
+etapa si au fost adaugate cu ajutorul claselor din pachetul strategies.
+
+In fisierul main au fost aduse putine modificiari, s-a adaugat o secventa de cod
+pentru a simula interactiunea angels-heroes si s-au facut mici modificari pentru
+ca output-rile, inclusiv ordinea acestora, sa corespunda cerintelor etapei.
+De asemenea citirea datelor suplimentare a necesitat adaugiri in clasele
+responsabile de input.
+
+================================================================================
+
+package angels:
+
+Angel:
+Deoarece ingerii sunt supravegheati de Marele Magician, clasa parinte Angel
+contine un obiect PropertyChangeSupport pentru a asigura aceasta
+functionalitate prin intermediul a doua functii:
+
+public final void addPropertyChangeListener(PropertyChangeListaner pcl):
+Are rolul de a il adauga pe Marele Magician ca observator al actiunilor
+ingerilor
+
+public void sendAngelNotification(AngelAction angelAction, Hero hero):
+Are rolul de a trimite o notificare Marelui Magician legata de actiune pe care
+ingerul a desfasurat-o
+
+================================================================================
+
+pakage angels.angelVisitors:
+
+Aceste clase au fost create in scopul implementarii pattern-ului Visitor,
+obiectele fiind separate de algoritmii ce actioneaza in numele lor.
+
+Fiecarei clase de eroi i s-a atribuit un "visitor" distinct deoarece ingerii
+actioneaza diferit asupra fiecarui tip de erou. Fiecare "visitor" contine 10
+metode de tip visit corespunzatoare numarului de ingeri al caror efect trebuie
+implementat.
+
+================================================================================
+
+package strategies:
+
+Aceste clase contin algoritmi ce modifica instantele de eroi pentru a implementa
+functionalitatiile din cerinta. Pattern-ul utilizat este Strategy, fiecare tip
+de erou putand sa aleaga una din cele 2 strategi (attack or defence) in functie
+de valorile variabilei health la runtime.
+
+Am considerat ca devreme ce strategiile nu tin cont de nimic altceva decat de
+health-ul jucatorului, a carui referinta poate fi trimisa ca parametru, aceste
+clase pot fi instante de Singleton pentru a micsora timpul de executie.
+
+================================================================================
+
+common.NotificationPanel:
+
+Aceasta intanta de singleton a fost utilizata pentru a usura afisarea efectuata
+de mecanismul de output. Fiecare notifiacre (String) pe care Marele Magician o
+primeste este adaugata pe acest "panou" pentru putea a fi afisata odata cu toate
+celelalte la finalul programului.
+
+Acest "panou de notificari" se comporta identic cu un buffer, retinand toate
+informatiile pana la momentul afisarii efective.
+
+================================================================================
+
+common.TheGreatMagician:
+
+Pentru a implementa pattern-ul Observer am realizat aceasta clasa de tip
+Singleton. 
+
+public void propertyChange(final PropertyChangeEvent event):
+Aceasta este unica functie a clasei responsabila cu adaugarea notificarii
+primite (String-ului primit) prin intermediul variabilei event la "panoul de
+notificari".
+
+================================================================================
