@@ -142,19 +142,19 @@ public final class Main {
         }
 
         // if a hero dies in this fight the other one receives the xp bonus, and may level up
-        if (hero1.isDead()) {
-            // The Great Magician should is notified about this death
-            hero2.sendHeroNotification(HeroActions.KILL, hero1);
-
-            hero2.bonusXpForKill(hero1);
-            hero2.checkLevelUp();
-        }
-
         if (hero2.isDead()) {
+            // The Great Magician should be notified about this death
             hero1.sendHeroNotification(HeroActions.KILL, hero2);
 
             hero1.bonusXpForKill(hero2);
             hero1.checkLevelUp();
+        }
+
+        if (hero1.isDead()) {
+            hero2.sendHeroNotification(HeroActions.KILL, hero1);
+
+            hero2.bonusXpForKill(hero1);
+            hero2.checkLevelUp();
         }
     }
 
