@@ -100,6 +100,11 @@ public final class Pyromancer extends Hero {
     }
 
     @Override
+    public String toStringFullStatistics() {
+        return "P" + super.toStringFullStatistics();
+    }
+
+    @Override
     public void setHealth(int health) {
         this.health = Math.min(health, (INITIAL_HEALTH + level * BONUS_HEALTH_LEVEL_UP));
     }

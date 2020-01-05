@@ -98,6 +98,11 @@ public final class Knight extends Hero {
     }
 
     @Override
+    public String toStringFullStatistics() {
+        return "K" + super.toStringFullStatistics();
+    }
+
+    @Override
     public void setHealth(int health) {
         this.health = Math.min(health, (INITIAL_HEALTH + level * BONUS_HEALTH_LEVEL_UP));
     }

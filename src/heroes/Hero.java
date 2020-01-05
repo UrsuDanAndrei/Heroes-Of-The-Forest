@@ -87,7 +87,7 @@ public abstract class Hero {
 
     // increase hero's experience according to the enemy he has killed
     public void bonusXpForKill(final Hero hero) {
-        if (hero.isDead()) {
+        if (this.isDead()) {
             return;
         }
 
@@ -102,6 +102,27 @@ public abstract class Hero {
 
     // simulates angel's effect over the hero
     public abstract void getAffectedByAngel(Angel angel);
+
+    public String toStringFullStatistics() {
+        StringBuilder sb = new StringBuilder();
+
+        if (isDead()) {
+            sb.append(" dead");
+        } else {
+            sb.append(" ");
+            sb.append(level);
+            sb.append(" ");
+            sb.append(xp);
+            sb.append(" ");
+            sb.append(health);
+            sb.append(" ");
+            sb.append(posMapX);
+            sb.append(" ");
+            sb.append(posMapY);
+        }
+
+        return sb.toString();
+    }
 
     // getters and setters
     public int getHealth() {

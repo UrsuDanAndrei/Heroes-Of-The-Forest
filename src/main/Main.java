@@ -6,6 +6,7 @@ import angels.Angel;
 import angels.AngelActions;
 import common.Map;
 
+import common.NotificationPanel;
 import common.TheGreatMagician;
 import heroes.Hero;
 
@@ -29,6 +30,7 @@ public final class Main {
         GameInputReader gameInputReader = new GameInputReader(args[0], args[1]);
         GameInput gameInput = gameInputReader.getGameInput();
 
+        // gaining the data from gameInput
         int noRounds = gameInput.getNoRounds();
         int noHeroes = gameInput.getNoHeroes();
 
@@ -37,11 +39,12 @@ public final class Main {
         List<String> moves = gameInput.getMoves();
         List<ArrayList<Angel>> allAngels = gameInput.getAllAngels();
 
+        // The Great Magician can now be notified about important game changes
         addTheGreatMagicianAsObserver(heroes, allAngels);
 
         // simulating the fame flow
         for (int round = 0; round < noRounds; ++round) {
-            System.out.println("~~ Round " + (round + 1) + " ~~");
+            NotificationPanel.getInstance().addNotification("~~ Round " + (round + 1) + " ~~");
 
             // each hero moves (if he can) as dictated by the array moves
             for (int heroIndex = 0; heroIndex < noHeroes; ++heroIndex) {
@@ -80,23 +83,21 @@ public final class Main {
             // simulates angel-hero interaction
             ArrayList<Angel> angels = allAngels.get(round);
             for (Angel angel : angels) {
-               // System.out.println(angel.toString() + " " + angel.getPosMapX() + " " + angel.getPosMapY());
                 angel.sendAngelNotification(AngelActions.SPAWN, null);
 
                 for (Hero hero : heroes) {
                     if (samePosition(hero, angel)) {
-                      //  System.out.println("SSSSSSSSSSSSSSSSSSs");
                         hero.getAffectedByAngel(angel);
                     }
                 }
             }
 
-            System.out.println();
+            NotificationPanel.getInstance().addNotification("NewLine");
         }
 
-        System.out.println("~~ Results ~~");
         // creating the output that will be written in the output file
-        GameOutput gameOutput = new GameOutput(heroes);
+        GameOutput gameOutput = new GameOutput(heroes,
+                NotificationPanel.getInstance().getNotifications());
         GameOutputWriter gameOutputWriter = new GameOutputWriter(args[0], args[1]);
 
         // writing the gameOutput in the file given as argument, closing it after

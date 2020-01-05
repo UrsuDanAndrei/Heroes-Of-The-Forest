@@ -98,6 +98,11 @@ public final class Wizard extends Hero {
     }
 
     @Override
+    public String toStringFullStatistics() {
+        return "W" + super.toStringFullStatistics();
+    }
+
+    @Override
     public void setHealth(int health) {
         this.health = Math.min(health, (INITIAL_HEALTH + level * BONUS_HEALTH_LEVEL_UP));
     }

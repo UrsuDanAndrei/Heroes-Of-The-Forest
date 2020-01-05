@@ -22,10 +22,8 @@ public class TheGreatMagician implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
-        // receives an notification about the most recent event
+        // receives an notification about the most recent event and adds it to the NotificationPanel
         String notification =  (String) event.getNewValue();
-
-        // displays the notification
-        System.out.println(notification);
+        NotificationPanel.getInstance().addNotification(notification);
     }
 }

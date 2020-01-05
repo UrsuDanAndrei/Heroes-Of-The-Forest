@@ -24,16 +24,28 @@ public final class GameOutputWriter {
     }
 
     public void write(final GameOutput gameOutput) {
-        List<Hero> heroes = gameOutput.getHeroes();
-        for (Hero hero : heroes) {
-            try {
-
-                System.out.println(hero.toString());
-                fs.writeWord(hero.toString());
-                fs.writeNewLine();
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            // displaying all notifications received by The Great Magician
+            List<String> notifications = gameOutput.getNotifications();
+            for (String notification : notifications) {
+                if (notification.equals("NewLine")) {
+                    fs.writeNewLine();
+                } else {
+                    fs.writeWord(notification);
+                    fs.writeNewLine();
+                }
             }
+
+            // displaying the results at the end of the game
+            fs.writeWord("~~ Results ~~");
+            fs.writeNewLine();
+            List<Hero> heroes = gameOutput.getHeroes();
+            for (Hero hero : heroes) {
+                fs.writeWord(hero.toStringFullStatistics());
+                fs.writeNewLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
