@@ -33,11 +33,11 @@ public final class Knight extends Hero {
 
         if (maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY < health
                 && health < maxHealthLevel / HEALTH_FACTOR_UP_STRATEGY) {
-            strategy = new KnightAttackStrategy();
+            strategy = KnightAttackStrategy.getInstance();
         }
 
         if (health < maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY) {
-            strategy = new KnightDefenceStrategy();
+            strategy = KnightDefenceStrategy.getInstance();
         }
     }
 

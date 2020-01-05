@@ -33,11 +33,11 @@ public final class Pyromancer extends Hero {
 
         if (maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY < health
                 && health < maxHealthLevel / HEALTH_FACTOR_UP_STRATEGY) {
-            strategy = new PyromancerAttackStrategy();
+            strategy = PyromancerAttackStrategy.getInstance();
         }
 
         if (health < maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY) {
-            strategy = new PyromancerDefenceStrategy();
+            strategy = PyromancerDefenceStrategy.getInstance();
         }
     }
 

@@ -45,12 +45,10 @@ public final class Main {
         // simulating the fame flow
         for (int round = 0; round < noRounds; ++round) {
             NotificationPanel.getInstance().addNotification("~~ Round " + (round + 1) + " ~~");
-            System.out.println();
-            System.out.println("----RUNDA---- " + (round + 1));
+
             // each hero moves (if he can) as dictated by the array moves
             for (int heroIndex = 0; heroIndex < noHeroes; ++heroIndex) {
                 Hero hero = heroes.get(heroIndex);
-                System.out.println(heroIndex + " " +  hero.toStringFullStatistics());
 
                 hero.getAffectedByOvertimeEffect();
 

@@ -33,11 +33,11 @@ public final class Rogue extends Hero {
 
         if (maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY < health
                 && health < maxHealthLevel / HEALTH_FACTOR_UP_STRATEGY) {
-            strategy = new RogueAttackStrategy();
+            strategy = RogueAttackStrategy.getInstance();
         }
 
         if (health < maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY) {
-            strategy = new RogueDefenceStrategy();
+            strategy = RogueDefenceStrategy.getInstance();
         }
     }
 

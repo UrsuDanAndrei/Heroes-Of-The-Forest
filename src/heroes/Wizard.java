@@ -33,11 +33,11 @@ public final class Wizard extends Hero {
 
         if (maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY < health
                 && health < maxHealthLevel / HEALTH_FACTOR_UP_STRATEGY) {
-            strategy = new WizardAttackStrategy();
+            strategy = WizardAttackStrategy.getInstance();
         }
 
         if (health < maxHealthLevel / HEALTH_FACTOR_DOWN_STRATEGY) {
-            strategy = new WizardDefenceStrategy();
+            strategy = WizardDefenceStrategy.getInstance();
         }
     }
 

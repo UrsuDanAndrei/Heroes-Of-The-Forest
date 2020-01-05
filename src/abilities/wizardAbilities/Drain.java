@@ -50,7 +50,7 @@ public final class Drain extends WizardAbility {
         // damaging the enemy hero
         float finalDamage = healthPercent * heroModifier
                 * Math.min(LIMIT_PERCENT * hero.getMaxHealth(), hero.getHealth());
-        System.out.println("Drain Damage: " + Math.round(finalDamage) + " de la: " + caster.toString());
+
         hero.setHealth(hero.getHealth() - Math.round(finalDamage));
     }
 

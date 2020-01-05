@@ -6,8 +6,22 @@ import heroes.Hero;
 import java.util.List;
 
 public class RogueDefenceStrategy implements Strategy {
+    private static RogueDefenceStrategy instance = null;
+
     private static final int HEALTH_FRACTION = 2;
     private static final float BONUS_MODIFIER = -0.1f;
+
+    private RogueDefenceStrategy() {
+
+    }
+
+    public static RogueDefenceStrategy getInstance() {
+        if (instance == null) {
+            instance = new RogueDefenceStrategy();
+        }
+
+        return instance;
+    }
 
     @Override
     public void applyStrategy(final Hero hero) {

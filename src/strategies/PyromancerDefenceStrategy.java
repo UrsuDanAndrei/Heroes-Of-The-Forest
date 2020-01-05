@@ -2,12 +2,27 @@ package strategies;
 
 import abilities.Ability;
 import heroes.Hero;
+import heroes.Pyromancer;
 
 import java.util.List;
 
 public class PyromancerDefenceStrategy implements Strategy {
+    private static PyromancerDefenceStrategy instance = null;
+
     private static final int HEALTH_FRACTION = 3;
     private static final float BONUS_MODIFIER = -0.3f;
+
+    private PyromancerDefenceStrategy() {
+
+    }
+
+    public static PyromancerDefenceStrategy getInstance() {
+        if (instance == null) {
+            instance = new PyromancerDefenceStrategy();
+        }
+
+        return instance;
+    }
 
     @Override
     public void applyStrategy(final Hero hero) {

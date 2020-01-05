@@ -6,8 +6,22 @@ import heroes.Hero;
 import java.util.List;
 
 public class WizardDefenceStrategy implements Strategy {
+    private static WizardDefenceStrategy instance;
+
     private static final int HEALTH_FRACTION = 5;
     private static final float BONUS_MODIFIER = -0.2f;
+
+    private WizardDefenceStrategy() {
+
+    }
+
+    public static WizardDefenceStrategy getInstance() {
+        if (instance == null) {
+            instance = new WizardDefenceStrategy();
+        }
+
+        return instance;
+    }
 
     @Override
     public void applyStrategy(final Hero hero) {
