@@ -13,16 +13,17 @@ public abstract class Angel implements AngelVisitable {
     protected String notification;
     protected PropertyChangeSupport pcs;
 
-    public Angel(int posMapX, int posMapY) {
+    public Angel(final int posMapX, final int posMapY) {
         this.posMapX = posMapX;
         this.posMapY = posMapY;
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+    public final void addPropertyChangeListener(final PropertyChangeListener pcl) {
         pcs.addPropertyChangeListener(pcl);
     }
 
-    public void sendAngelNotification(AngelActions action, Hero hero) {
+    // sends a notification to The Great Magician about an action that was performed by this angel
+    public void sendAngelNotification(final AngelActions action, final Hero hero) {
         switch (action) {
             case HIT:
                 notification += " hit " + hero.toString();
@@ -41,19 +42,20 @@ public abstract class Angel implements AngelVisitable {
         pcs.firePropertyChange("notification", "", notification);
     }
 
-    public int getPosMapX() {
+    // getters and setters
+    public final int getPosMapX() {
         return posMapX;
     }
 
-    public void setPosMapX(int posMapX) {
+    public final void setPosMapX(final int posMapX) {
         this.posMapX = posMapX;
     }
 
-    public int getPosMapY() {
+    public final int getPosMapY() {
         return posMapY;
     }
 
-    public void setPosMapY(int posMapY) {
+    public final void setPosMapY(final int posMapY) {
         this.posMapY = posMapY;
     }
 }

@@ -23,7 +23,8 @@ public final class HeroesFactory {
         return instance;
     }
 
-    public Hero createHero(final HeroTypes type, final int posMapX, final int posMapY, final int id) {
+    public Hero createHero(final HeroTypes type, final int posMapX, final int posMapY,
+                           final int id) {
         List<Ability> abilities = new ArrayList<>();
         AbilitiesFactory abilitiesFactory = AbilitiesFactory.getInstance();
         Hero hero;

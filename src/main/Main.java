@@ -57,7 +57,7 @@ public final class Main {
                     continue;
                 }
 
-                // if the hero is not dead and is not stunned he chooses a strategy
+                // if the hero is not dead or stunned he chooses a strategy
                 if (hero.isStunned()) {
                     hero.setStunned(false);
                 } else {
@@ -68,7 +68,7 @@ public final class Main {
                 }
             }
 
-            // checking for fights
+            // checking for fights between heroes
             for (int i = 0; i < noHeroes; ++i) {
                 for (int j = i + 1; j < noHeroes; ++j) {
                     Hero hero1 = heroes.get(i);
@@ -158,8 +158,8 @@ public final class Main {
         }
     }
 
-    private static void addTheGreatMagicianAsObserver(List<Hero> heroes,
-                                                      List<ArrayList<Angel>> allAngels) {
+    private static void addTheGreatMagicianAsObserver(final List<Hero> heroes,
+                                                      final List<ArrayList<Angel>> allAngels) {
         TheGreatMagician tgm = TheGreatMagician.getInstance();
 
         for (Hero hero : heroes) {

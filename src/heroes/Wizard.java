@@ -1,12 +1,13 @@
 package heroes;
 
 import abilities.Ability;
+
 import angels.Angel;
 import angels.angelVisitors.WizardAngelVisitor;
+
 import common.Constants;
 import common.Map;
-import strategies.PyromancerAttackStrategy;
-import strategies.PyromancerDefenceStrategy;
+
 import strategies.WizardAttackStrategy;
 import strategies.WizardDefenceStrategy;
 
@@ -20,7 +21,8 @@ public final class Wizard extends Hero {
     private static final int HEALTH_FACTOR_DOWN_STRATEGY = 4;
     private static final int HEALTH_FACTOR_UP_STRATEGY = 2;
 
-    public Wizard(final int posMapX, final int posMapY, final List<Ability> abilities, final int id) {
+    public Wizard(final int posMapX, final int posMapY, final List<Ability> abilities,
+                  final int id) {
         super(posMapX, posMapY, abilities, id);
         health = INITIAL_HEALTH;
         pcs = new PropertyChangeSupport(this);
@@ -42,7 +44,7 @@ public final class Wizard extends Hero {
     }
 
     @Override
-    public void sendHeroNotification(HeroActions action, Hero hero) {
+    public void sendHeroNotification(final HeroActions action, final Hero hero) {
         notification = this.toString();
         super.sendHeroNotification(action, hero);
     }
@@ -89,7 +91,7 @@ public final class Wizard extends Hero {
     }
 
     @Override
-    public void getAffectedByAngel(Angel angel) {
+    public void getAffectedByAngel(final Angel angel) {
         WizardAngelVisitor wav = WizardAngelVisitor.getInstance();
         angel.accept(wav, this);
     }
@@ -105,7 +107,7 @@ public final class Wizard extends Hero {
     }
 
     @Override
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         this.health = Math.min(health, (INITIAL_HEALTH + level * BONUS_HEALTH_LEVEL_UP));
     }
 }

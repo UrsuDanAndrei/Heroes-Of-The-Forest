@@ -6,20 +6,20 @@ import heroes.Hero;
 
 import java.beans.PropertyChangeSupport;
 
-public class Spawner extends Angel implements AngelVisitable {
-    public Spawner(int posMapX, int posMapY) {
+public final class Spawner extends Angel implements AngelVisitable {
+    public Spawner(final int posMapX, final int posMapY) {
         super(posMapX, posMapY);
         pcs = new PropertyChangeSupport(this);
     }
 
     @Override
-    public void sendAngelNotification(AngelActions action, Hero hero) {
+    public void sendAngelNotification(final AngelActions action, final Hero hero) {
         notification = "Spawner";
         super.sendAngelNotification(action, hero);
     }
 
     @Override
-    public void accept(AngelVisitor av, Hero hero) {
+    public void accept(final AngelVisitor av, final Hero hero) {
         av.visit(this, hero);
     }
 }

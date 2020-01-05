@@ -3,7 +3,8 @@ package common;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationPanel {
+// is responsible of keeping the track of the events
+public final class NotificationPanel {
     private static NotificationPanel instance = null;
 
     private List<String> notifications;
@@ -20,7 +21,7 @@ public class NotificationPanel {
         return instance;
     }
 
-    public void addNotification(String notification) {
+    public void addNotification(final String notification) {
         notifications.add(notification);
     }
 

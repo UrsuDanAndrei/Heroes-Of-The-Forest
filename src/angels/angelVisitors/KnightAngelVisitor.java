@@ -1,17 +1,29 @@
 package angels.angelVisitors;
 
 import abilities.Ability;
-import angels.*;
+
+import angels.DamageAngel;
+import angels.DarkAngel;
+import angels.Dracula;
+import angels.GoodBoy;
+import angels.LevelUpAngel;
+import angels.LifeGiver;
+import angels.SmallAngel;
+import angels.Spawner;
+import angels.TheDoomer;
+import angels.XPAngel;
+import angels.AngelActions;
+
 import common.Constants;
+
 import heroes.Hero;
 import heroes.HeroActions;
-import heroes.Knight;
 
-import javax.swing.*;
 import java.util.List;
 
-public class KnightAngelVisitor implements AngelVisitor {
-    public static KnightAngelVisitor instance = null;
+
+public final class KnightAngelVisitor implements AngelVisitor {
+    private static KnightAngelVisitor instance = null;
 
     private static final float DAMAGE_ANGEL_MODIFIER = 0.15f;
 
@@ -47,7 +59,7 @@ public class KnightAngelVisitor implements AngelVisitor {
     }
 
     @Override
-    public void visit(DamageAngel damageAngel, Hero hero) {
+    public void visit(final DamageAngel damageAngel, final Hero hero) {
         if (hero.isDead()) {
             return;
         }
@@ -58,7 +70,7 @@ public class KnightAngelVisitor implements AngelVisitor {
     }
 
     @Override
-    public void visit(DarkAngel darkAngel, Hero hero) {
+    public void visit(final DarkAngel darkAngel, final Hero hero) {
         if (hero.isDead()) {
             return;
         }
@@ -72,7 +84,7 @@ public class KnightAngelVisitor implements AngelVisitor {
     }
 
     @Override
-    public void visit(Dracula dracula, Hero hero) {
+    public void visit(final Dracula dracula, final Hero hero) {
         if (hero.isDead()) {
             return;
         }
@@ -87,7 +99,7 @@ public class KnightAngelVisitor implements AngelVisitor {
     }
 
     @Override
-    public void visit(GoodBoy goodBoy, Hero hero) {
+    public void visit(final GoodBoy goodBoy, final Hero hero) {
         if (hero.isDead()) {
             return;
         }
@@ -99,7 +111,7 @@ public class KnightAngelVisitor implements AngelVisitor {
     }
 
     @Override
-    public void visit(LevelUpAngel levelUpAngel, Hero hero) {
+    public void visit(final LevelUpAngel levelUpAngel, final Hero hero) {
         if (hero.isDead()) {
             return;
         }
@@ -115,7 +127,7 @@ public class KnightAngelVisitor implements AngelVisitor {
     }
 
     @Override
-    public void visit(LifeGiver lifeGiver, Hero hero) {
+    public void visit(final LifeGiver lifeGiver, final Hero hero) {
         if (hero.isDead()) {
             return;
         }
@@ -126,7 +138,7 @@ public class KnightAngelVisitor implements AngelVisitor {
     }
 
     @Override
-    public void visit(SmallAngel smallAngel, Hero hero) {
+    public void visit(final SmallAngel smallAngel, final Hero hero) {
         if (hero.isDead()) {
             return;
         }
@@ -138,7 +150,7 @@ public class KnightAngelVisitor implements AngelVisitor {
     }
 
     @Override
-    public void visit(Spawner spawner, Hero hero) {
+    public void visit(final Spawner spawner, final Hero hero) {
         if (!hero.isDead()) {
             return;
         }
@@ -149,7 +161,7 @@ public class KnightAngelVisitor implements AngelVisitor {
     }
 
     @Override
-    public void visit(TheDoomer theDoomer, Hero hero) {
+    public void visit(final TheDoomer theDoomer, final Hero hero) {
         if (hero.isDead()) {
             return;
         }
@@ -160,7 +172,7 @@ public class KnightAngelVisitor implements AngelVisitor {
     }
 
     @Override
-    public void visit(XPAngel xpAngel, Hero hero) {
+    public void visit(final XPAngel xpAngel, final Hero hero) {
         if (hero.isDead()) {
             return;
         }

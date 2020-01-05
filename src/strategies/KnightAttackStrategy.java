@@ -5,8 +5,8 @@ import heroes.Hero;
 
 import java.util.List;
 
-public class KnightAttackStrategy implements Strategy {
-    public static KnightAttackStrategy instance = null;
+public final class KnightAttackStrategy implements Strategy {
+    private static KnightAttackStrategy instance = null;
 
     private static final int HEALTH_FRACTION = -5;
     private static final float BONUS_MODIFIER = 0.5f;

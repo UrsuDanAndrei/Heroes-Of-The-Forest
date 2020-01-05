@@ -22,43 +22,43 @@ public abstract class Ability {
 
     public abstract void updateAbility();
 
-    public void setCaster(final Hero caster) {
+    public final void setCaster(final Hero caster) {
         this.caster = caster;
     }
 
-    public int getDamage() {
+    public final int getDamage() {
         return Math.round(damage);
     }
 
-    public float getRogueModifier() {
+    public final float getRogueModifier() {
         return rogueModifier;
     }
 
-    public void setRogueModifier(float rogueModifier) {
+    public final void setRogueModifier(final float rogueModifier) {
         this.rogueModifier = rogueModifier;
     }
 
-    public float getKnightModifier() {
+    public final float getKnightModifier() {
         return knightModifier;
     }
 
-    public void setKnightModifier(float knightModifier) {
+    public final void setKnightModifier(final float knightModifier) {
         this.knightModifier = knightModifier;
     }
 
-    public float getPyromancerModifier() {
+    public final float getPyromancerModifier() {
         return pyromancerModifier;
     }
 
-    public void setPyromancerModifier(float pyromancerModifier) {
+    public final void setPyromancerModifier(final float pyromancerModifier) {
         this.pyromancerModifier = pyromancerModifier;
     }
 
-    public float getWizardModifier() {
+    public final float getWizardModifier() {
         return wizardModifier;
     }
 
-    public void setWizardModifier(float wizardModifier) {
+    public final void setWizardModifier(final float wizardModifier) {
         this.wizardModifier = wizardModifier;
     }
 }

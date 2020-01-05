@@ -2,11 +2,10 @@ package strategies;
 
 import abilities.Ability;
 import heroes.Hero;
-import heroes.Pyromancer;
 
 import java.util.List;
 
-public class PyromancerAttackStrategy implements Strategy {
+public final class PyromancerAttackStrategy implements Strategy {
     private static PyromancerAttackStrategy instance = null;
 
     private static final int HEALTH_FRACTION = -4;

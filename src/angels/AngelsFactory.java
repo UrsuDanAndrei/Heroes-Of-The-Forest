@@ -1,6 +1,6 @@
 package angels;
 
-public class AngelsFactory {
+public final class AngelsFactory {
     private static AngelsFactory instance = null;
     private AngelsFactory() {
 
@@ -14,7 +14,7 @@ public class AngelsFactory {
         return instance;
     }
 
-    public Angel createAngel(AngelTypes type, int posMapX, int posMapY) {
+    public Angel createAngel(final AngelTypes type, final int posMapX, final int posMapY) {
         Angel angel;
 
         switch (type) {

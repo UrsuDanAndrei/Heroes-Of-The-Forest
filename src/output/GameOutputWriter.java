@@ -5,7 +5,6 @@ import heroes.Hero;
 import java.util.List;
 
 import fileio.FileSystem;
-import heroes.Pyromancer;
 
 public final class GameOutputWriter {
     private final String inputPath;

@@ -40,11 +40,12 @@ public abstract class Hero {
         this.abilities = abilities;
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+    public final void addPropertyChangeListener(final PropertyChangeListener pcl) {
         pcs.addPropertyChangeListener(pcl);
     }
 
-    public void sendHeroNotification(HeroActions action, Hero hero) {
+    // notifies The Great Magician about an important action performed by this hero
+    public void sendHeroNotification(final HeroActions action, final Hero hero) {
         switch (action) {
             case KILL:
                 notification = "Player " + hero.toString() + " was killed by " + notification;
@@ -65,12 +66,13 @@ public abstract class Hero {
         pcs.firePropertyChange("notification", "", this.notification);
     }
 
-    public void applyStrategy() {
+    public final void applyStrategy() {
         if (strategy != null) {
             strategy.applyStrategy(this);
         }
     }
 
+    // based on the current status the hero chooses a strategy
     public abstract void chooseStrategy();
 
     public abstract void getAffectedByAbility(Ability ability);
@@ -86,7 +88,7 @@ public abstract class Hero {
     public abstract void checkLevelUp();
 
     // increase hero's experience according to the enemy he has killed
-    public void bonusXpForKill(final Hero hero) {
+    public final void bonusXpForKill(final Hero hero) {
         if (this.isDead()) {
             return;
         }
@@ -96,7 +98,7 @@ public abstract class Hero {
     }
 
     // returns the terrain instance that is at hero's position on the map
-    public Terrain getTerrain() {
+    public final Terrain getTerrain() {
         return Map.getInstance().getTerrain(posMapX, posMapY);
     }
 
@@ -125,63 +127,63 @@ public abstract class Hero {
     }
 
     // getters and setters
-    public int getHealth() {
+    public final int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         this.health = health;
     }
 
-    public int getLevel() {
+    public final int getLevel() {
         return level;
     }
 
-    public int getPosMapX() {
+    public final int getPosMapX() {
         return posMapX;
     }
 
-    public void setPosMapX(final int posMapX) {
+    public final void setPosMapX(final int posMapX) {
         this.posMapX = posMapX;
     }
 
-    public int getPosMapY() {
+    public final int getPosMapY() {
         return posMapY;
     }
 
-    public void setPosMapY(final int posMapY) {
+    public final void setPosMapY(final int posMapY) {
         this.posMapY = posMapY;
     }
 
-    public List<Ability> getAbilities() {
+    public final List<Ability> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(final List<Ability> abilities) {
+    public final void setAbilities(final List<Ability> abilities) {
         this.abilities = abilities;
     }
 
-    public boolean isStunned() {
+    public final boolean isStunned() {
         return stunned;
     }
 
-    public void setStunned(final boolean stunned) {
+    public final void setStunned(final boolean stunned) {
         this.stunned = stunned;
     }
 
-    public boolean isDead() {
+    public final boolean isDead() {
         return health <= 0;
     }
 
-    public void setOvertimeEffect(final OvertimeEffect overtimeEffect) {
+    public final void setOvertimeEffect(final OvertimeEffect overtimeEffect) {
         this.overtimeEffect = overtimeEffect;
     }
 
-    public int getXp() {
+    public final int getXp() {
         return xp;
     }
 
-    public void setXp(int xp) {
+    public final void setXp(final int xp) {
         this.xp = xp;
     }
 }

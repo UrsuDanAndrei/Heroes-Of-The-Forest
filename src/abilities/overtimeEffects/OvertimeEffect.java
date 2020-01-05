@@ -16,7 +16,7 @@ public abstract class OvertimeEffect {
      */
     public abstract void overtimeAffectHero(Hero hero);
 
-    public int getNoRounds() {
+    public final int getNoRounds() {
         return noRounds;
     }
 }

@@ -5,7 +5,7 @@ import heroes.Hero;
 
 import java.util.List;
 
-public class KnightDefenceStrategy implements Strategy {
+public final class KnightDefenceStrategy implements Strategy {
     private static KnightDefenceStrategy instance = null;
 
     private static final int HEALTH_FRACTION = 4;
